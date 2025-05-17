@@ -2,13 +2,13 @@ package Modelos;
 
 import Modelos.carrinho.Carrinho;
 import Modelos.cliente.Cliente;
+import Modelos.delivery.Entrega;
+
 import java.util.List;
 
 public class Pedido {
     private Integer id;
-    private Integer datatime_pedido;
-    private Integer nPedido;
-    
+    private Integer datatime_pedido;    
        
     private List<Carrinho> carrinho;
     private Cliente cliente;
@@ -16,17 +16,10 @@ public class Pedido {
     
     private String reembolso;
     private StatusPedido status;
+
+    private Entrega entrega;
     
     public Pedido() {
-    }
-    public Pedido(Integer id, Integer datatime_pedido, Integer nPedido, List<Carrinho> carrinho, Cliente cliente, String reembolso, StatusPedido status) {
-        this.id = id;
-        this.datatime_pedido = datatime_pedido;
-        this.nPedido = nPedido;
-        this.carrinho = carrinho;
-        this.cliente = cliente;
-        this.reembolso = reembolso;
-        this.status = status;
     }
     public Integer getId() {
         return id;
@@ -39,12 +32,6 @@ public class Pedido {
     }
     public void setDatatime_pedido(Integer datatime_pedido) {
         this.datatime_pedido = datatime_pedido;
-    }
-    public Integer getNPedido() {
-        return nPedido;
-    }
-    public void setNPedido(Integer nPedido) {
-        this.nPedido = nPedido;
     }
     public List<Carrinho> getCarrinho() {
         return carrinho;
@@ -69,5 +56,11 @@ public class Pedido {
     }
     public void setStatus(StatusPedido status) {
         this.status = status;
+    }
+    public Entrega getEntrega() {
+        return entrega;
+    }
+    public void setEntrega(Entrega entrega) {
+        this.entrega = entrega;
     }
 }

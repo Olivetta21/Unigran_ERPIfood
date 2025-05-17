@@ -1,8 +1,5 @@
 package Modelos.delivery;
 
-import Modelos.Pedido;
-import Modelos.StatusPedido;
-import Modelos.cliente.Cliente;
 import Modelos.delivery.endereco.Endereco;
 
 public class Entrega {

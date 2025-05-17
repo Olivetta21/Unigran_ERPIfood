@@ -6,77 +6,73 @@ import java.sql.ResultSet;
 
 import Conexao.Conexao;
 import Modelos.cliente.Cliente;
+import Modelos.cliente.ClienteDAOImpl;
 
 public class PedidoDAOImpl implements PedidoDAO {
-     @Override
-    public void criar(Pedido p) throws Exception {
+    @Override
+    public void criar(Pedido pedido) throws Exception {
         Connection con = Conexao.get();
-        PreparedStatement ps = con.prepareStatement(
-            "INSERT INTO pedido (datatime_pedido, npedido, cliente_id, reembolso, status_id) VALUES (?, ?, ?, ?, ?)"
+        PreparedStatement stmt = con.prepareStatement(
+            "INSERT INTO pedido(cliente_id, datatime_pedido, reembolso, status) VALUES (?, ?, ?, ?)"
         );
-        ps.setInt(1, p.getDatatime_pedido());
-        ps.setInt(2, p.getNPedido());
-        ps.setInt(3, p.getCliente().getId());
-        ps.setString(4, p.getReembolso());
-        ps.setInt(5, p.getStatus().getId());
-        ps.executeUpdate();
+        stmt.setInt(1, pedido.getCliente().getId());
+        stmt.setInt(2, pedido.getDatatime_pedido());
+        stmt.setString(3, pedido.getReembolso());
+        stmt.setString(4, pedido.getStatus().toString());
+        stmt.executeUpdate();
         con.close();
     }
 
     @Override
     public Pedido ler(int id) throws Exception {
         Connection con = Conexao.get();
-        PreparedStatement ps = con.prepareStatement(
-            "SELECT id, datatime_pedido, npedido, cliente_id, reembolso, status_id FROM pedido WHERE id = ?"
+        PreparedStatement stmt = con.prepareStatement(
+            "SELECT id, cliente_id, datatime_pedido, reembolso, status_id FROM pedido WHERE id = ?"
         );
-        ps.setInt(1, id);
-        ResultSet rs = ps.executeQuery();
-        Pedido p = null;
-        if (rs.next()) {
-            p = new Pedido();
-            p.setId(rs.getInt("id"));
-            p.setDatatime_pedido(rs.getInt("datatime_pedido"));
-            p.setNPedido(rs.getInt("npedido"));
+        stmt.setInt(1, id);
+        ResultSet r = stmt.executeQuery();
 
-            Cliente c = new Cliente();
-            c.setId(rs.getInt("cliente_id"));
-            p.setCliente(c);
-
-            p.setReembolso(rs.getString("reembolso"));
-
-            StatusPedido status = new StatusPedido();
-            status.setId(rs.getInt("status_id"));
-            p.setStatus(status);
+        Pedido pedido = null;
+        if (r.next()) {
+            pedido = new Pedido();
+            pedido.setId(r.getInt("id"));
+            pedido.setDatatime_pedido(r.getInt("datatime_pedido"));
+            pedido.setReembolso(r.getString("reembolso"));
+            pedido.setStatus(new StatusPedidoDAOImpl().ler(r.getInt("status_id")));
+            
+            ClienteDAOImpl clienteDAO = new ClienteDAOImpl();
+            Cliente cliente = clienteDAO.ler(r.getInt("cliente_id"));
+            pedido.setCliente(cliente);
         }
         con.close();
-        return p;
+        return pedido;
     }
 
     @Override
-    public void atualizar(Pedido p) throws Exception {
+    public void atualizar(Pedido pedido) throws Exception {
         Connection con = Conexao.get();
-        PreparedStatement ps = con.prepareStatement(
-            "UPDATE pedido SET datatime_pedido = ?, npedido = ?, cliente_id = ?, reembolso = ?, status_id = ? WHERE id = ?"
+        PreparedStatement stmt = con.prepareStatement(
+            "UPDATE pedido SET cliente_id = ?, datatime_pedido = ?, reembolso = ?, status = ? WHERE id = ?"
         );
-        ps.setInt(1, p.getDatatime_pedido());
-        ps.setInt(2, p.getNPedido());
-        ps.setInt(3, p.getCliente().getId());
-        ps.setString(4, p.getReembolso());
-        ps.setInt(5, p.getStatus().getId());
-        ps.setInt(6, p.getId());
-        ps.executeUpdate();
+        stmt.setInt(1, pedido.getCliente().getId());
+        stmt.setInt(2, pedido.getDatatime_pedido());
+        stmt.setString(3, pedido.getReembolso());
+        stmt.setString(4, pedido.getStatus().toString());
+        stmt.setInt(5, pedido.getId());
+        stmt.executeUpdate();
         con.close();
     }
 
     @Override
     public void deletar(int id) throws Exception {
         Connection con = Conexao.get();
-        PreparedStatement ps = con.prepareStatement(
+        PreparedStatement stmt = con.prepareStatement(
             "DELETE FROM pedido WHERE id = ?"
         );
-        ps.setInt(1, id);
-        ps.executeUpdate();
+        stmt.setInt(1, id);
+        stmt.executeUpdate();
+        
+        stmt.close();
         con.close();
     }
-
 }

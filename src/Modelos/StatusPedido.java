@@ -6,10 +6,6 @@ public class StatusPedido {
 
     public StatusPedido() {
     }
-    public StatusPedido(Integer id, String progresso) {
-        this.id = id;
-        this.progresso = progresso;
-    }
     public Integer getId() {
         return id;
     }
