@@ -1,35 +1,42 @@
 package Modelos.carrinho.ingrediente;
 
-import java.util.List;
 
 public class IngredienteEscolha {
     private Integer id;
-    private List<IngrRem> ingrRem;
-    private List<IngrAdi> ingrAdi;
+    private Boolean toExclude;
+    private Ingrediente ingrediente;
 
     public IngredienteEscolha() {
     }
-    public IngredienteEscolha(Integer id, List<IngrRem> ingrRem, List<IngrAdi> ingrAdi) {
+    public IngredienteEscolha(Integer id, Boolean toExclude, Ingrediente ingrediente) {
         this.id = id;
-        this.ingrRem = ingrRem;
-        this.ingrAdi = ingrAdi;
+        this.toExclude = toExclude;
+        this.ingrediente = ingrediente;
     }
+
     public Integer getId() {
         return id;
     }
+
     public void setId(Integer id) {
         this.id = id;
     }
-    public List<IngrRem> getIngrRem() {
-        return ingrRem;
+
+    public Boolean getToExclude() {
+        return toExclude;
     }
-    public void setIngrRem(List<IngrRem> ingrRem) {
-        this.ingrRem = ingrRem;
+
+    public void setToExclude(Boolean toExclude) {
+        this.toExclude = toExclude;
     }
-    public List<IngrAdi> getIngrAdi() {
-        return ingrAdi;
+
+    public Ingrediente getIngrediente() {
+        return ingrediente;
     }
-    public void setIngrAdi(List<IngrAdi> ingrAdi) {
-        this.ingrAdi = ingrAdi;
+
+    public void setIngrediente(Ingrediente ingrediente) {
+        this.ingrediente = ingrediente;
     }
+    
+    
 }
