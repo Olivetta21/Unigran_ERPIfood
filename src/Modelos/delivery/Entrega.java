@@ -6,9 +6,10 @@ public class Entrega {
     private Integer id;
     private String chave;
     private Endereco endereco;
+    private Double valor;
 
     public Entrega() {}
-    public Entrega(Integer id, String chave, Endereco endereco) {
+    public Entrega(Integer id, String chave, Endereco endereco, Double valor) {
         this.id = id;
         this.chave = chave;
         this.endereco = endereco;
@@ -36,6 +37,14 @@ public class Entrega {
 
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
+    }
+
+    public Double getValor() {
+        return valor;
+    }
+
+    public void setValor(Double valor) {
+        this.valor = valor;
     }
     
     

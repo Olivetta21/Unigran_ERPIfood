@@ -7,8 +7,9 @@ public class EntregaDTO {
     public Integer id;
     public String chave;
     public Endereco endereco;
+    public Double valor;
     
     public Entrega builder() {
-        return new Entrega(id, chave, endereco);
+        return new Entrega(id, chave, endereco, valor);
     }
 }
