@@ -6,15 +6,11 @@ import java.util.List;
 public class Cliente {
     private Integer id;
     private String nome;
+    private List<Cartao> cartoes;
     
     private List<Telefone> telefones;
     
     public Cliente() {}
-    public Cliente(Integer id, String nome, List<Telefone> telefones) {
-        this.id = id;
-        this.nome = nome;
-        this.telefones = telefones;
-    }
     public Integer getId() {
         return id;
     }
@@ -26,6 +22,12 @@ public class Cliente {
     }
     public void setNome(String nome) {
         this.nome = nome;
+    }
+    public List<Cartao> getCartoes() {
+        return cartoes;
+    }
+    public void setCartoes(List<Cartao> cartoes) {
+        this.cartoes = cartoes;
     }
     public List<Telefone> getTelefones() {
         return telefones;

@@ -4,67 +4,67 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import Modelos.Conexao;
+import Conexao.Conexao;
 
 public class ClienteDAOImpl implements ClienteDAO{ 
 
     @Override
     public void criar(Cliente cliente) throws Exception {
-        Connection con = Conexao.getConnection();
+        Connection con = Conexao.get();
 
-        PreparedStatement p = con.prepareStatement(
+        PreparedStatement stmt = con.prepareStatement(
             "INSERT INTO cliente(nome) VALUES (?)"
         );
-        p.setString(1, cliente.getNome());
-        p.executeUpdate();
+        stmt.setString(1, cliente.getNome());
+        stmt.executeUpdate();
 
         con.close();
     }
 
     @Override
     public Cliente ler(int id) throws Exception {
-        Connection con = Conexao.getConnection();
+        Connection con = Conexao.get();
 
-        PreparedStatement p = con.prepareStatement(
+        PreparedStatement stmt = con.prepareStatement(
             "SELECT id, nome FROM cliente WHERE id = ?"
         );
-        p.setInt(1, id);
-        ResultSet r = p.executeQuery();
+        stmt.setInt(1, id);
+        ResultSet rs = stmt.executeQuery();
+
         Cliente cliente = null;
-        if (r.next()) {
+        if (rs.next()) {
             cliente = new Cliente();
-            cliente.setId(r.getInt("id"));
-            cliente.setNome(r.getString("nome"));
+            cliente.setId(rs.getInt("id"));
+            cliente.setNome(rs.getString("nome"));
         }
 
         con.close();
-
         return cliente;
     }
 
     @Override
     public void atualizar(Cliente cliente) throws Exception {
-        Connection con = Conexao.getConnection();
+        Connection con = Conexao.get();
 
-        PreparedStatement p = con.prepareStatement(
+        PreparedStatement stmt = con.prepareStatement(
             "UPDATE cliente SET nome = ? WHERE id = ?"
         );
-        p.setString(1, cliente.getNome());
-        p.setInt(2, cliente.getId());
-        p.executeUpdate();
+        stmt.setString(1, cliente.getNome());
+        stmt.setInt(2, cliente.getId());
+        stmt.executeUpdate();
 
         con.close();
     }
     
     @Override
     public void deletar(int id) throws Exception {
-        Connection con = Conexao.getConnection();
+        Connection con = Conexao.get();
 
-        PreparedStatement p = con.prepareStatement(
+        PreparedStatement stmt = con.prepareStatement(
             "DELETE FROM cliente WHERE id = ?"
         );
-        p.setInt(1, id);
-        p.executeUpdate();
+        stmt.setInt(1, id);
+        stmt.executeUpdate();
 
         con.close();
     }
