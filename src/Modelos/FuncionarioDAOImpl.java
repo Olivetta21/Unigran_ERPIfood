@@ -13,7 +13,6 @@ public class FuncionarioDAOImpl implements FuncionarioDAO{
     public void criar(Funcionario f) throws Exception {
         Connection con = Conexao.get();
 
-        // 1. Inserir na tabela cliente
         PreparedStatement pc = con.prepareStatement(
             "INSERT INTO cliente(nome) VALUES(?)", Statement.RETURN_GENERATED_KEYS);
         pc.setString(1, f.getNome());
@@ -25,7 +24,6 @@ public class FuncionarioDAOImpl implements FuncionarioDAO{
             idGerado = rs.getInt(1);
         }
 
-        // 2. Inserir na tabela funcionario
         PreparedStatement pf = con.prepareStatement(
             "INSERT INTO funcionario(id, cpf, rg, login_id) VALUES (?, ?, ?, ?)");
         pf.setInt(1, idGerado);
@@ -91,14 +89,9 @@ public class FuncionarioDAOImpl implements FuncionarioDAO{
     public void deletar(int id) throws Exception {
         Connection con = Conexao.get();
 
-        // Primeiro deleta da tabela funcionario, depois de cliente
         PreparedStatement pf = con.prepareStatement("DELETE FROM funcionario WHERE id = ?");
         pf.setInt(1, id);
         pf.executeUpdate();
-
-        PreparedStatement pc = con.prepareStatement("DELETE FROM cliente WHERE id = ?");
-        pc.setInt(1, id);
-        pc.executeUpdate();
 
         con.close();
     }
