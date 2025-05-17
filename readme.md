@@ -1,6 +1,6 @@
 # Programação Desktop
 
-## ERP Ifood (da deepwep)
+## ERP Ifood (da deepweb)
 
 Este projeto foi inicialmente baseado no diagrama elaborado por Karen:
 
