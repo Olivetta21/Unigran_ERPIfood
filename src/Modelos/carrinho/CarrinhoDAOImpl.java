@@ -4,45 +4,45 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import Modelos.Conexao;
-import Modelos.carrinho.produto.Produto;
+import Conexao.Conexao;
+import Modelos.carrinho.produto.ProdutoDAOImpl;
 
 public class CarrinhoDAOImpl implements CarrinhoDAO {
     
     @Override
     public void criar(Carrinho carrinho) throws Exception {
-        Connection con = Conexao.getConnection();
+        Connection con = Conexao.get();
 
-        PreparedStatement p = con.prepareStatement(
+        PreparedStatement stmt = con.prepareStatement(
             "INSERT INTO carrinho(produto_id, quantidade) VALUES (?, ?)"
         );
-        p.setInt(1, carrinho.getProduto().getId());
-        p.setInt(2, carrinho.getQuantidade());
-        p.executeUpdate();
+        stmt.setInt(1, carrinho.getProduto().getId());
+        stmt.setInt(2, carrinho.getQuantidade());
+        stmt.executeUpdate();
 
         con.close();
     }
 
     @Override
     public Carrinho ler(int id) throws Exception {
-        Connection con = Conexao.getConnection();
+        Connection con = Conexao.get();
 
-        PreparedStatement p = con.prepareStatement(
+        PreparedStatement stmt = con.prepareStatement(
             "SELECT id, produto_id, quantidade FROM carrinho WHERE id = ?"
         );
-        p.setInt(1, id);
-        ResultSet r = p.executeQuery();
+        stmt.setInt(1, id);
+        ResultSet rs = stmt.executeQuery();
         Carrinho carrinho = null;
-        if (r.next()) {
+        if (rs.next()) {
             carrinho = new Carrinho();
-            carrinho.setId(r.getInt("id"));
-            carrinho.setQuantidade(r.getInt("quantidade"));
+            carrinho.setId(rs.getInt("id"));
+            carrinho.setQuantidade(rs.getInt("quantidade"));
 
-            Produto produto = new Produto();
-            produto.setId(r.getInt("produto_id"));
-            carrinho.setProduto(produto);
+            carrinho.setProduto(new ProdutoDAOImpl().ler(rs.getInt("produto_id")));
         }
 
+        stmt.close();
+        rs.close();
         con.close();
 
         return carrinho;
@@ -50,27 +50,31 @@ public class CarrinhoDAOImpl implements CarrinhoDAO {
 
     @Override
     public void atualizar(Carrinho carrinho) throws Exception {
-        Connection con = Conexao.getConnection();
+        Connection con = Conexao.get();
 
-        PreparedStatement p = con.prepareStatement(
+        PreparedStatement stmt = con.prepareStatement(
             "UPDATE carrinho SET produto_id = ?, quantidade = ? WHERE id = ?"
         );
-        p.setInt(1, carrinho.getProduto().getId());
-        p.setInt(2, carrinho.getQuantidade());
-        p.setInt(3, carrinho.getId());
-        p.executeUpdate();
+        stmt.setInt(1, carrinho.getProduto().getId());
+        stmt.setInt(2, carrinho.getQuantidade());
+        stmt.setInt(3, carrinho.getId());
+        stmt.executeUpdate();
         
+        stmt.close();
         con.close();
     }
 
     @Override
     public void deletar(int id) throws Exception {
-        Connection con = Conexao.getConnection();
-        PreparedStatement p = con.prepareStatement(
+        Connection con = Conexao.get();
+        
+        PreparedStatement stmt = con.prepareStatement(
             "DELETE FROM carrinho WHERE id = ?"
         );
-        p.setInt(1, id);
-        p.executeUpdate();
+        stmt.setInt(1, id);
+        stmt.executeUpdate();
+
+        stmt.close();
         con.close();
     }
 }
