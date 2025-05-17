@@ -6,10 +6,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import Conexao.Conexao;
+
 public class FuncionarioDAOImpl implements FuncionarioDAO{
     @Override
     public void criar(Funcionario f) throws Exception {
-        Connection con = Conexao.getConnection();
+        Connection con = Conexao.get();
 
         // 1. Inserir na tabela cliente
         PreparedStatement pc = con.prepareStatement(
@@ -37,7 +39,7 @@ public class FuncionarioDAOImpl implements FuncionarioDAO{
 
     @Override
     public Funcionario ler(int id) throws Exception {
-        Connection con = Conexao.getConnection();
+        Connection con = Conexao.get();
 
         PreparedStatement p = con.prepareStatement(
             "SELECT c.nome, f.cpf, f.rg, f.login_id FROM cliente c JOIN funcionario f ON c.id = f.id WHERE c.id = ?"
@@ -67,7 +69,7 @@ public class FuncionarioDAOImpl implements FuncionarioDAO{
 
     @Override
     public void atualizar(Funcionario f) throws Exception {
-        Connection con = Conexao.getConnection();
+        Connection con = Conexao.get();
 
         PreparedStatement pc = con.prepareStatement("UPDATE cliente SET nome = ? WHERE id = ?");
         pc.setString(1, f.getNome());
@@ -87,7 +89,7 @@ public class FuncionarioDAOImpl implements FuncionarioDAO{
 
     @Override
     public void deletar(int id) throws Exception {
-        Connection con = Conexao.getConnection();
+        Connection con = Conexao.get();
 
         // Primeiro deleta da tabela funcionario, depois de cliente
         PreparedStatement pf = con.prepareStatement("DELETE FROM funcionario WHERE id = ?");

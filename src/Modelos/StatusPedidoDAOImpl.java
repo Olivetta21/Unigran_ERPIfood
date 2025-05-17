@@ -4,10 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import Conexao.Conexao;
+
 public class StatusPedidoDAOImpl implements StatusPedidoDAO {
     @Override
     public void criar(StatusPedido s) throws Exception {
-        Connection con = Conexao.getConnection();
+        Connection con = Conexao.get();
         PreparedStatement p = con.prepareStatement(
             "INSERT INTO status_pedido (progresso) VALUES (?)"
         );
@@ -18,7 +20,7 @@ public class StatusPedidoDAOImpl implements StatusPedidoDAO {
 
     @Override
     public StatusPedido ler(int id) throws Exception {
-        Connection con = Conexao.getConnection();
+        Connection con = Conexao.get();
         PreparedStatement p = con.prepareStatement(
             "SELECT id, progresso FROM status_pedido WHERE id = ?"
         );
@@ -36,7 +38,7 @@ public class StatusPedidoDAOImpl implements StatusPedidoDAO {
 
     @Override
     public void atualizar(StatusPedido s) throws Exception {
-        Connection con = Conexao.getConnection();
+        Connection con = Conexao.get();
         PreparedStatement p = con.prepareStatement(
             "UPDATE status_pedido SET progresso = ? WHERE id = ?"
         );
@@ -48,7 +50,7 @@ public class StatusPedidoDAOImpl implements StatusPedidoDAO {
 
     @Override
     public void deletar(int id) throws Exception {
-        Connection con = Conexao.getConnection();
+        Connection con = Conexao.get();
         PreparedStatement p = con.prepareStatement(
             "DELETE FROM status_pedido WHERE id = ?"
         );

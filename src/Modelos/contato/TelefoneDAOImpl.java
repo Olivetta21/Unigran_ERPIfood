@@ -4,13 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import Modelos.Conexao;
+import Conexao.Conexao;
 
 public class TelefoneDAOImpl implements TelefoneDAO{ 
 
     @Override
     public void criar(Telefone telefone) throws Exception {
-        Connection con = Conexao.getConnection();
+        Connection con = Conexao.get();
 
         PreparedStatement p = con.prepareStatement(
             "INSERT INTO telefone(numero, cliente_id) VALUES (?, ?)"
@@ -24,7 +24,7 @@ public class TelefoneDAOImpl implements TelefoneDAO{
 
     @Override
     public Telefone ler(int id) throws Exception {
-        Connection con = Conexao.getConnection();
+        Connection con = Conexao.get();
 
         PreparedStatement p = con.prepareStatement(
             "SELECT id, numero, cliente_id FROM telefone WHERE id = ?"
@@ -46,7 +46,7 @@ public class TelefoneDAOImpl implements TelefoneDAO{
 
     @Override
     public void atualizar(Telefone telefone) throws Exception {
-        Connection con = Conexao.getConnection();
+        Connection con = Conexao.get();
 
         PreparedStatement p = con.prepareStatement(
             "UPDATE telefone SET numero = ?, cliente_id = ? WHERE id = ?"
@@ -61,7 +61,7 @@ public class TelefoneDAOImpl implements TelefoneDAO{
     
     @Override
     public void deletar(int id) throws Exception {
-        Connection con = Conexao.getConnection();
+        Connection con = Conexao.get();
 
         PreparedStatement p = con.prepareStatement(
             "DELETE FROM telefone WHERE id = ?"

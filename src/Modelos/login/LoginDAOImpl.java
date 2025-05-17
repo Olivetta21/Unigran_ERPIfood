@@ -4,12 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import Modelos.Conexao;
+import Conexao.Conexao;
 
 public class LoginDAOImpl implements LoginDAO {
     @Override
     public void criar(Login login) throws Exception {
-        Connection con = Conexao.getConnection();
+        Connection con = Conexao.get();
         PreparedStatement p = con.prepareStatement(
             "INSERT INTO login (senha) VALUES (?)"
         );
@@ -20,7 +20,7 @@ public class LoginDAOImpl implements LoginDAO {
 
     @Override
     public Login ler(int id) throws Exception {
-        Connection con = Conexao.getConnection();
+        Connection con = Conexao.get();
         PreparedStatement p = con.prepareStatement(
             "SELECT id, senha FROM login WHERE id = ?"
         );
@@ -40,7 +40,7 @@ public class LoginDAOImpl implements LoginDAO {
 
     @Override
     public void atualizar(Login login) throws Exception {
-        Connection con = Conexao.getConnection();
+        Connection con = Conexao.get();
         PreparedStatement p = con.prepareStatement(
             "UPDATE login SET senha = ? WHERE id = ?"
         );
@@ -52,7 +52,7 @@ public class LoginDAOImpl implements LoginDAO {
     
     @Override
     public void deletar(int id) throws Exception {
-        Connection con = Conexao.getConnection();
+        Connection con = Conexao.get();
         PreparedStatement p = con.prepareStatement(
             "DELETE FROM login WHERE id = ?"
         );

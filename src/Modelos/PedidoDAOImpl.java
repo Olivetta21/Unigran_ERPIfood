@@ -4,12 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import Conexao.Conexao;
 import Modelos.cliente.Cliente;
 
 public class PedidoDAOImpl implements PedidoDAO {
      @Override
     public void criar(Pedido p) throws Exception {
-        Connection con = Conexao.getConnection();
+        Connection con = Conexao.get();
         PreparedStatement ps = con.prepareStatement(
             "INSERT INTO pedido (datatime_pedido, npedido, cliente_id, reembolso, status_id) VALUES (?, ?, ?, ?, ?)"
         );
@@ -24,7 +25,7 @@ public class PedidoDAOImpl implements PedidoDAO {
 
     @Override
     public Pedido ler(int id) throws Exception {
-        Connection con = Conexao.getConnection();
+        Connection con = Conexao.get();
         PreparedStatement ps = con.prepareStatement(
             "SELECT id, datatime_pedido, npedido, cliente_id, reembolso, status_id FROM pedido WHERE id = ?"
         );
@@ -53,7 +54,7 @@ public class PedidoDAOImpl implements PedidoDAO {
 
     @Override
     public void atualizar(Pedido p) throws Exception {
-        Connection con = Conexao.getConnection();
+        Connection con = Conexao.get();
         PreparedStatement ps = con.prepareStatement(
             "UPDATE pedido SET datatime_pedido = ?, npedido = ?, cliente_id = ?, reembolso = ?, status_id = ? WHERE id = ?"
         );
@@ -69,7 +70,7 @@ public class PedidoDAOImpl implements PedidoDAO {
 
     @Override
     public void deletar(int id) throws Exception {
-        Connection con = Conexao.getConnection();
+        Connection con = Conexao.get();
         PreparedStatement ps = con.prepareStatement(
             "DELETE FROM pedido WHERE id = ?"
         );

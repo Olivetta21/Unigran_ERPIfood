@@ -6,12 +6,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import Conexao.Conexao;
+
 
 public class EntregaDAOImpl implements EntregaDAO{
     
     @Override
     public void criar(Entrega entrega) throws Exception {
-        Connection con = Conexao.getConnection();
+        Connection con = Conexao.get();
         PreparedStatement p = con.prepareStatement(
             "INSERT INTO entrega(cliente_id, is_delivery, delivery_id, pedido_id, status_id) VALUES (?, ?, ?, ?, ?)"
         );
@@ -26,7 +28,7 @@ public class EntregaDAOImpl implements EntregaDAO{
 
     @Override
     public Entrega ler(int id) throws Exception {
-        Connection con = Conexao.getConnection();
+        Connection con = Conexao.get();
         PreparedStatement p = con.prepareStatement(
             "SELECT * FROM entrega WHERE id = ?"
         );
@@ -50,7 +52,7 @@ public class EntregaDAOImpl implements EntregaDAO{
 
     @Override
     public void atualizar(Entrega entrega) throws Exception {
-        Connection con = Conexao.getConnection();
+        Connection con = Conexao.get();
         PreparedStatement p = con.prepareStatement(
             "UPDATE entrega SET cliente_id = ?, is_delivery = ?, delivery_id = ?, pedido_id = ?, status_id = ? WHERE id = ?"
         );
@@ -66,7 +68,7 @@ public class EntregaDAOImpl implements EntregaDAO{
 
     @Override
     public void deletar(int id) throws Exception {
-        Connection con = Conexao.getConnection();
+        Connection con = Conexao.get();
         PreparedStatement p = con.prepareStatement("DELETE FROM entrega WHERE id = ?");
         p.setInt(1, id);
         p.executeUpdate();
