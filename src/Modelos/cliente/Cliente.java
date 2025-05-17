@@ -11,6 +11,12 @@ public class Cliente {
     private List<Telefone> telefones;
     
     public Cliente() {}
+    public Cliente(Integer id, String nome, List<Cartao> cartoes, List<Telefone> telefones) {
+        this.id = id;
+        this.nome = nome;
+        this.cartoes = cartoes;
+        this.telefones = telefones;
+    }
     public Integer getId() {
         return id;
     }

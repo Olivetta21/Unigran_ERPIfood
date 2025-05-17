@@ -13,10 +13,9 @@ public class TelefoneDAOImpl implements TelefoneDAO{
         Connection con = Conexao.get();
 
         PreparedStatement p = con.prepareStatement(
-            "INSERT INTO telefone(numero, cliente_id) VALUES (?, ?)"
+            "INSERT INTO telefone(numero) VALUES (?)"
         );
         p.setString(1, telefone.getNumero());
-        p.setInt(2, telefone.getClienteId());
         p.executeUpdate();
 
         con.close();
@@ -36,7 +35,6 @@ public class TelefoneDAOImpl implements TelefoneDAO{
             telefone = new Telefone();
             telefone.setId(r.getInt("id"));
             telefone.setNumero(r.getString("numero"));
-            telefone.setClienteId(r.getInt("cliente_id"));
         }
 
         con.close();
@@ -49,11 +47,10 @@ public class TelefoneDAOImpl implements TelefoneDAO{
         Connection con = Conexao.get();
 
         PreparedStatement p = con.prepareStatement(
-            "UPDATE telefone SET numero = ?, cliente_id = ? WHERE id = ?"
+            "UPDATE telefone SET numero = ? WHERE id = ?"
         );
         p.setString(1, telefone.getNumero());
-        p.setInt(2, telefone.getClienteId());
-        p.setInt(3, telefone.getId());
+        p.setInt(2, telefone.getId());
         p.executeUpdate();
 
         con.close();

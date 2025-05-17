@@ -4,7 +4,6 @@ public class Telefone {
     private Integer id;
     private String ddd;
     private String numero;
-    private Integer clienteId;
 
     public Telefone() {}
     public Telefone(Integer id, String ddd, String numero) {
@@ -29,11 +28,5 @@ public class Telefone {
     }
     public void setNumero(String numero) {
         this.numero = numero;
-    }
-    public Integer getClienteId() {
-        return clienteId;
-    }
-    public void setClienteId(Integer clienteId) {
-        this.clienteId = clienteId;
     }
 }
