@@ -19,7 +19,15 @@ public class Pedido {
 
     private Entrega entrega;
     
-    public Pedido() {
+    public Pedido() {}
+    public Pedido(Integer id, Integer datatime_pedido, List<Carrinho> carrinho, Cliente cliente, String reembolso, StatusPedido status, Entrega entrega) {
+        this.id = id;
+        this.datatime_pedido = datatime_pedido;
+        this.carrinho = carrinho;
+        this.cliente = cliente;
+        this.reembolso = reembolso;
+        this.status = status;
+        this.entrega = entrega;
     }
     public Integer getId() {
         return id;

@@ -4,7 +4,10 @@ public class StatusPedido {
     private Integer id;
     private String progresso;
 
-    public StatusPedido() {
+    public StatusPedido() {}
+    public StatusPedido(Integer id, String progresso) {
+        this.id = id;
+        this.progresso = progresso;
     }
     public Integer getId() {
         return id;
