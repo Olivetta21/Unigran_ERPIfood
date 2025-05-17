@@ -1,43 +1,63 @@
 package Modelos.pagamento;
 
 import Modelos.pagamento.cupom.Cupom;
-import Modelos.pagamento.metodo.Metodo;
 
 public class Pagamento {
     private Integer id;
-    private Integer pedido_id;
-    private Metodo metodo;
+    private Double pix;
+    private Double cartao;
+    private Double dinheiro;
     private Cupom cupom;
 
     public Pagamento() {}
-    public Pagamento(Integer id, Integer pedido_id, Metodo metodo, Cupom cupom) {
+    public Pagamento(Integer id, Double pix, Double cartao, Double dinheiro, Cupom cupom) {
         this.id = id;
-        this.pedido_id = pedido_id;
-        this.metodo = metodo;
+        this.pix = pix;
+        this.cartao = cartao;
+        this.dinheiro = dinheiro;
         this.cupom = cupom;
     }
+
     public Integer getId() {
         return id;
     }
+
     public void setId(Integer id) {
         this.id = id;
     }
-    public Integer getPedido_id() {
-        return pedido_id;
+
+    public Double getPix() {
+        return pix;
     }
-    public void setPedido_id(Integer pedido_id) {
-        this.pedido_id = pedido_id;
+
+    public void setPix(Double pix) {
+        this.pix = pix;
     }
-    public Metodo getMetodo() {
-        return metodo;
+
+    public Double getCartao() {
+        return cartao;
     }
-    public void setMetodo(Metodo metodo) {
-        this.metodo = metodo;
+
+    public void setCartao(Double cartao) {
+        this.cartao = cartao;
     }
+
+    public Double getDinheiro() {
+        return dinheiro;
+    }
+
+    public void setDinheiro(Double dinheiro) {
+        this.dinheiro = dinheiro;
+    }
+
     public Cupom getCupom() {
         return cupom;
     }
+
     public void setCupom(Cupom cupom) {
         this.cupom = cupom;
     }
+    
+    
+    
 }
