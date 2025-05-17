@@ -1,4 +1,4 @@
-package Modelos;
+package Modelos.delivery;
 
 public interface EntregaDAO {
     void criar(Entrega entrega) throws Exception;

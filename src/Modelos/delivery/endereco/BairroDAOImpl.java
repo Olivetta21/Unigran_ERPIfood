@@ -1,6 +1,6 @@
 package Modelos.delivery.endereco;
 
-import Modelos.Conexao;
+import Conexao.Conexao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,7 +9,7 @@ public class BairroDAOImpl implements BairroDAO {
     
     @Override
     public void criar(Bairro bairro) throws Exception {
-        Connection con = Conexao.getConnection();
+        Connection con = Conexao.get();
         PreparedStatement p = con.prepareStatement(
             "INSERT INTO bairro(nome) VALUES (?)"
         );
@@ -20,7 +20,7 @@ public class BairroDAOImpl implements BairroDAO {
 
     @Override
     public Bairro ler(int id) throws Exception {
-        Connection con = Conexao.getConnection();
+        Connection con = Conexao.get();
         PreparedStatement p = con.prepareStatement(
             "SELECT id, nome FROM bairro WHERE id = ?"
         );
@@ -39,7 +39,7 @@ public class BairroDAOImpl implements BairroDAO {
 
     @Override
     public void atualizar(Bairro bairro) throws Exception {
-        Connection con = Conexao.getConnection();
+        Connection con = Conexao.get();
         PreparedStatement p = con.prepareStatement(
             "UPDATE bairro SET nome = ? WHERE id = ?"
         );
@@ -51,7 +51,7 @@ public class BairroDAOImpl implements BairroDAO {
 
     @Override
     public void deletar(int id) throws Exception {
-        Connection con = Conexao.getConnection();
+        Connection con = Conexao.get();
         PreparedStatement p = con.prepareStatement(
             "DELETE FROM bairro WHERE id = ?"
         );

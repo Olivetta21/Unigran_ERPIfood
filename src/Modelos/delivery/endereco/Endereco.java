@@ -8,16 +8,9 @@ public class Endereco {
     private String cep;
     private Bairro bairro;
     
-    private Integer distancia;
+    private String complemento;
 
     public Endereco() {
-    }
-    public Endereco(Integer id, String numero, String cep, Bairro bairro, Integer distancia) {
-        this.id = id;
-        this.numero = numero;
-        this.cep = cep;
-        this.bairro = bairro;
-        this.distancia = distancia;
     }
     public Integer getId() {
         return id;
@@ -49,10 +42,10 @@ public class Endereco {
     public void setBairro(Bairro bairro) {
         this.bairro = bairro;
     }
-    public Integer getDistancia() {
-        return distancia;
+    public String getComplemento() {
+        return complemento;
     }
-    public void setDistancia(Integer distancia) {
-        this.distancia = distancia;
+    public void setComplemento(String complemento) {
+        this.complemento = complemento;
     }
 }

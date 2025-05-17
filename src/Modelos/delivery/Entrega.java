@@ -1,34 +1,41 @@
 package Modelos.delivery;
 
+import Modelos.Pedido;
+import Modelos.StatusPedido;
+import Modelos.cliente.Cliente;
 import Modelos.delivery.endereco.Endereco;
 
-public class Taxa {
+public class Entrega {
     private Integer id;
+    private String chave;
     private Endereco endereco;
-    private Double valor;
 
-    public Taxa () {}
-    public Taxa(Integer id, Endereco endereco, Double valor) {
-        this.id = id;
-        this.endereco = endereco;
-        this.valor = valor;
+    public Entrega() {
     }
+
     public Integer getId() {
         return id;
     }
+
     public void setId(Integer id) {
         this.id = id;
     }
+
+    public String getChave() {
+        return chave;
+    }
+
+    public void setChave(String chave) {
+        this.chave = chave;
+    }
+
     public Endereco getEndereco() {
         return endereco;
     }
+
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
     }
-    public Double getValor() {
-        return valor;
-    }
-    public void setValor(Double valor) {
-        this.valor = valor;
-    }
+    
+    
 }
