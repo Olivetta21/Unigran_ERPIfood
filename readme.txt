@@ -1,1 +1,0 @@
-O trabalho que inicialmente estava baseado no diagrama da karen "./others/diagrama_der_karen.png" foi alterado para o novo modelo, seguindo o novo diagrama corrigido por mim, em "./others/diagrama_der_ivan(corrigido).png".
