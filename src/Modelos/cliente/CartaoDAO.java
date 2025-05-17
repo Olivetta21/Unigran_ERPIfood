@@ -1,4 +1,4 @@
-package Modelos.pagamento.metodo;
+package Modelos.cliente;
 
 public interface CartaoDAO {
     void criar(Cartao cartao) throws Exception;

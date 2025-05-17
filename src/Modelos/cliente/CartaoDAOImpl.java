@@ -1,4 +1,4 @@
-package Modelos.pagamento.metodo;
+package Modelos.cliente;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

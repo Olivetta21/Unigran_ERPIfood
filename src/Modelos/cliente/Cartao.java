@@ -1,4 +1,4 @@
-package Modelos.pagamento.metodo;
+package Modelos.cliente;
 
 public class Cartao {
     private Integer id;
