@@ -10,7 +10,14 @@ public class Endereco {
     
     private String complemento;
 
-    public Endereco() {
+    public Endereco() {}
+    public Endereco(Integer id, String rua, String numero, String cep, Bairro bairro, String complemento) {
+        this.id = id;
+        this.rua = rua;
+        this.numero = numero;
+        this.cep = cep;
+        this.bairro = bairro;
+        this.complemento = complemento;
     }
     public Integer getId() {
         return id;

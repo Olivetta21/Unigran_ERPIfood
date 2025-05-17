@@ -7,7 +7,11 @@ public class Entrega {
     private String chave;
     private Endereco endereco;
 
-    public Entrega() {
+    public Entrega() {}
+    public Entrega(Integer id, String chave, Endereco endereco) {
+        this.id = id;
+        this.chave = chave;
+        this.endereco = endereco;
     }
 
     public Integer getId() {
