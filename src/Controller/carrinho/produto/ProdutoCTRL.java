@@ -1,14 +1,19 @@
 package Controller.carrinho.produto;
 
 import DTOs.carrinho.produto.ProdutoDTO;
+import Interfaces.ControllerInterface;
+import Interfaces.InterfaceDTO;
 import Modelos.carrinho.produto.Produto;
 import Modelos.carrinho.produto.ProdutoDAO;
 import Modelos.carrinho.produto.ProdutoDAOImpl;
 
-public class ProdutoCTRL {
-    public void criar(ProdutoDTO ProdutoDTO) throws Exception {
+public class ProdutoCTRL extends ControllerInterface {
+
+    @Override
+    public void criar(InterfaceDTO ProdutoDTO) throws Exception {
         ProdutoDAO dao = new ProdutoDAOImpl();
-        dao.criar(ProdutoDTO.builder());
+        ProdutoDTO dto = (ProdutoDTO) ProdutoDTO;
+        dao.criar(dto.builder());
     }
 
     public Produto ler(int id) throws Exception {
