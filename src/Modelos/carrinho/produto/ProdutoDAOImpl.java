@@ -1,11 +1,12 @@
 package Modelos.carrinho.produto;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import Conexao.Conexao;
-import javax.swing.JOptionPane;
 
 public class ProdutoDAOImpl implements ProdutoDAO {
     
@@ -23,15 +24,6 @@ public class ProdutoDAOImpl implements ProdutoDAO {
 
         stmt.close();
         con.close();
-
-        
-        StringBuilder strb = new StringBuilder();
-        strb.append("Produto " + produto.getId() + ":");
-        strb.append(produto.getNome());
-        strb.append(" com valor: ");
-        strb.append(produto.getValor());
-        strb.append(" cadastrado com sucesso!"); 
-        JOptionPane.showMessageDialog(null, strb.toString(), "Cadastro de Produto", JOptionPane.INFORMATION_MESSAGE);
     }
 
     @Override
@@ -56,6 +48,29 @@ public class ProdutoDAOImpl implements ProdutoDAO {
         con.close();
 
         return produto;
+    }
+
+    public List<Produto> listar() throws Exception {
+        Connection con = Conexao.get();
+
+        List<Produto> produtos = new ArrayList<>();
+        PreparedStatement stmt = con.prepareStatement(
+            "SELECT id, nome, valor FROM produto"
+        );
+        ResultSet rs = stmt.executeQuery();
+        while (rs.next()) {
+            Produto produto = new Produto();
+            produto.setId(rs.getInt("id"));
+            produto.setNome(rs.getString("nome"));
+            produto.setValor(rs.getDouble("valor"));
+            produtos.add(produto);
+        }
+
+        stmt.close();
+        rs.close();
+        con.close();
+
+        return produtos;
     }
 
     @Override

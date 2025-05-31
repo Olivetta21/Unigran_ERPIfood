@@ -4,6 +4,9 @@
  */
 package Interfaces.Carrinho.Produto;
 
+import javax.swing.JOptionPane;
+
+import Controller.carrinho.produto.ProdutoCTRL;
 import DTOs.carrinho.produto.ProdutoDTO;
 import Interfaces.InterfaceDTO;
 import Interfaces.PainelInterface;
@@ -18,13 +21,36 @@ public class ProdutoCriarPainel extends PainelInterface {
     }
     
     @Override
-    public InterfaceDTO getDTO() {
+    public InterfaceDTO getData() {
         ProdutoDTO pdto = new ProdutoDTO();
-        pdto.id = Integer.valueOf(this.JTA_id.getText());
-        pdto.nome = this.jTA_nome.getText();
-        pdto.valor = Double.valueOf(this.jTA_valor.getText());
+
+        String id = this.JTA_id.getText();
+        String nome = this.jTA_nome.getText();
+        String valor = this.jTA_valor.getText();
+
+        if (id != null && !id.isEmpty()) {
+            pdto.id = Integer.parseInt(id);
+        }
+        pdto.nome = nome;
+        if (valor != null && !valor.isEmpty()) {
+            pdto.valor = Double.parseDouble(valor);
+        }
                
         return (InterfaceDTO) pdto;
+    }
+    
+    @Override
+    public void setDados(InterfaceDTO dto) {
+        this.JTA_id.setText(String.valueOf(((ProdutoDTO) dto).id));
+        this.jTA_nome.setText(((ProdutoDTO) dto).nome);
+        this.jTA_valor.setText(String.valueOf(((ProdutoDTO) dto).valor));
+    }
+
+    @Override
+    public void clear() {
+        this.JTA_id.setText("");
+        this.jTA_nome.setText("");
+        this.jTA_valor.setText("");
     }
 
     /**

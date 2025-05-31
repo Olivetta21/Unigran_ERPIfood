@@ -39,6 +39,9 @@ public class CadastroGeral extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jB_cancelar = new javax.swing.JButton();
         jB_salvar = new javax.swing.JButton();
+        jB_puxarid = new javax.swing.JButton();
+        jB_listagem = new javax.swing.JButton();
+        jB_deletar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(400, 300));
@@ -59,6 +62,30 @@ public class CadastroGeral extends javax.swing.JDialog {
         });
         jPanel1.add(jB_salvar);
 
+        jB_puxarid.setText("Puxar ID");
+        jB_puxarid.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_puxaridActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jB_puxarid);
+
+        jB_listagem.setText("Listagem");
+        jB_listagem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_listagemActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jB_listagem);
+
+        jB_deletar.setText("Deletar");
+        jB_deletar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jB_deletarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(jB_deletar);
+
         getContentPane().add(jPanel1, java.awt.BorderLayout.PAGE_END);
 
         pack();
@@ -70,16 +97,47 @@ public class CadastroGeral extends javax.swing.JDialog {
 
     private void jB_salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_salvarActionPerformed
         try {
-            this.ctrl.criar(this.pain.getDTO());
+            this.ctrl.criar(this.pain.getData());
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Erro ao salvar", "Erro", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Erro ao salvar: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_jB_salvarActionPerformed
+
+    private void jB_listagemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_listagemActionPerformed
+        try {
+            Object[][] data = this.ctrl.listar();
+            String[] titulos = this.ctrl.titulos();
+
+            new ListagemGeral(null, true, data, titulos);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro ao listar: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }        
+    }//GEN-LAST:event_jB_listagemActionPerformed
+
+    private void jB_deletarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_deletarActionPerformed
+        try {
+            this.ctrl.deletar(this.pain.getData());
+            this.pain.clear();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Erro ao deletar", "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jB_deletarActionPerformed
+
+    private void jB_puxaridActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_puxaridActionPerformed
+        try {
+            this.pain.setDados(this.ctrl.ler(this.pain.getData()));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao puxar ID: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_jB_puxaridActionPerformed
 
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jB_cancelar;
+    private javax.swing.JButton jB_deletar;
+    private javax.swing.JButton jB_listagem;
+    private javax.swing.JButton jB_puxarid;
     private javax.swing.JButton jB_salvar;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables

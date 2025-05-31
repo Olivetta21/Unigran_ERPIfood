@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+import javax.swing.JOptionPane;
+
 public class Conexao {
     private static Connection con = null;
     String URL = "jdbc:postgresql://localhost:5432/trabdesktopjava";
@@ -12,21 +14,18 @@ public class Conexao {
 
     private Conexao() {
         try {
-            getConnection();
+            con = DriverManager.getConnection(URL, USER, PASSWORD);
         } catch (SQLException e) {
             System.out.println("Erro ao conectar ao banco de dados: " + e.getMessage());
         }
     }
 
     public static Connection get(){
-        if (con == null) {
-            new Conexao();
+        try {
+            if (con == null || con.isClosed()) new Conexao();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro ao testar conexão: " + e.getMessage(), "Erro", JOptionPane.ERROR_MESSAGE);
         }
         return con;
     }
-
-    private Connection getConnection() throws SQLException {
-        return con = (con == null ? DriverManager.getConnection(URL, USER, PASSWORD) : con);
-    }
-
 }
