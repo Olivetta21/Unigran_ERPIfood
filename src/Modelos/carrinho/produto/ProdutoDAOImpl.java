@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import Conexao.Conexao;
+import javax.swing.JOptionPane;
 
 public class ProdutoDAOImpl implements ProdutoDAO {
     
@@ -13,14 +14,24 @@ public class ProdutoDAOImpl implements ProdutoDAO {
         Connection con = Conexao.get();
 
         PreparedStatement stmt = con.prepareStatement(
-            "INSERT INTO produto(nome, vlr_uni) VALUES(?, ?)"
+            "INSERT INTO produto(nome, valor) VALUES(?, ?)"
         );
+        
         stmt.setString(1, produto.getNome());
         stmt.setDouble(2, produto.getValor());
         stmt.executeUpdate();
 
         stmt.close();
         con.close();
+
+        
+        StringBuilder strb = new StringBuilder();
+        strb.append("Produto " + produto.getId() + ":");
+        strb.append(produto.getNome());
+        strb.append(" com valor: ");
+        strb.append(produto.getValor());
+        strb.append(" cadastrado com sucesso!"); 
+        JOptionPane.showMessageDialog(null, strb.toString(), "Cadastro de Produto", JOptionPane.INFORMATION_MESSAGE);
     }
 
     @Override

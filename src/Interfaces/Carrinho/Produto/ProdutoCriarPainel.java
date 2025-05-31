@@ -4,6 +4,7 @@
  */
 package Interfaces.Carrinho.Produto;
 
+import DTOs.carrinho.produto.ProdutoDTO;
 import Interfaces.InterfaceDTO;
 import Interfaces.PainelInterface;
 
@@ -18,8 +19,12 @@ public class ProdutoCriarPainel extends PainelInterface {
     
     @Override
     public InterfaceDTO getDTO() {
-        
-        return null;
+        ProdutoDTO pdto = new ProdutoDTO();
+        pdto.id = Integer.valueOf(this.JTA_id.getText());
+        pdto.nome = this.jTA_nome.getText();
+        pdto.valor = Double.valueOf(this.jTA_valor.getText());
+               
+        return (InterfaceDTO) pdto;
     }
 
     /**
@@ -32,29 +37,73 @@ public class ProdutoCriarPainel extends PainelInterface {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        JTA_id = new javax.swing.JTextArea();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTA_nome = new javax.swing.JTextArea();
+        jPanel3 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTA_valor = new javax.swing.JTextArea();
 
-        setLayout(new java.awt.BorderLayout());
+        setLayout(new java.awt.GridLayout(3, 1, 5, 5));
 
-        jButton1.setText("jButton1");
-        jPanel1.add(jButton1);
+        jPanel1.setLayout(new java.awt.BorderLayout());
 
-        jButton2.setText("jButton2");
-        jPanel1.add(jButton2);
+        jLabel1.setText("ID");
+        jPanel1.add(jLabel1, java.awt.BorderLayout.CENTER);
 
-        add(jPanel1, java.awt.BorderLayout.PAGE_END);
+        JTA_id.setColumns(20);
+        JTA_id.setRows(1);
+        jScrollPane1.setViewportView(JTA_id);
 
-        jLabel1.setText("Laber");
-        add(jLabel1, java.awt.BorderLayout.CENTER);
+        jPanel1.add(jScrollPane1, java.awt.BorderLayout.PAGE_END);
+
+        add(jPanel1);
+
+        jPanel2.setLayout(new java.awt.BorderLayout());
+
+        jLabel2.setText("Nome");
+        jPanel2.add(jLabel2, java.awt.BorderLayout.CENTER);
+
+        jTA_nome.setColumns(20);
+        jTA_nome.setRows(1);
+        jScrollPane2.setViewportView(jTA_nome);
+
+        jPanel2.add(jScrollPane2, java.awt.BorderLayout.PAGE_END);
+
+        add(jPanel2);
+
+        jPanel3.setLayout(new java.awt.BorderLayout());
+
+        jLabel3.setText("Valor");
+        jPanel3.add(jLabel3, java.awt.BorderLayout.CENTER);
+
+        jTA_valor.setColumns(20);
+        jTA_valor.setRows(1);
+        jScrollPane3.setViewportView(jTA_valor);
+
+        jPanel3.add(jScrollPane3, java.awt.BorderLayout.PAGE_END);
+
+        add(jPanel3);
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JTextArea JTA_id;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTextArea jTA_nome;
+    private javax.swing.JTextArea jTA_valor;
     // End of variables declaration//GEN-END:variables
 }

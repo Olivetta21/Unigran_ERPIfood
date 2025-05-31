@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class Conexao {
     private static Connection con = null;
-    String URL = "jdbc:postgresql://localhost:5432/gercarro";
+    String URL = "jdbc:postgresql://localhost:5432/trabdesktopjava";
     String USER = "postgres";
     String PASSWORD = "1234";
 
