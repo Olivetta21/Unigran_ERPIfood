@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package Interfaces.Carrinho.Produto;
+package Interfaces.login;
 
-import DTOs.carrinho.produto.ProdutoDTO;
+import DTOs.login.LoginDTO;
 import Interfaces.InterfaceDTO;
 import Interfaces.PainelInterface;
 
@@ -12,42 +12,40 @@ import Interfaces.PainelInterface;
  *
  * @author i
  */
-public class ProdutoCriarPainel extends PainelInterface {
-    public ProdutoCriarPainel() {
+public class LoginCriarPainel extends PainelInterface {
+    public LoginCriarPainel() {
         initComponents();
     }
     
     @Override
     public InterfaceDTO getData() {
-        ProdutoDTO pdto = new ProdutoDTO();
+        LoginDTO pdto = new LoginDTO();
 
         String id = this.JTA_id.getText();
-        String nome = this.jTA_nome.getText();
-        String valor = this.jTA_valor.getText();
+        String login = this.jTA_login.getText();
+        String senha = this.jTA_senha.getText();
 
         if (id != null && !id.isEmpty()) {
             pdto.id = Integer.parseInt(id);
         }
-        pdto.nome = nome;
-        if (valor != null && !valor.isEmpty()) {
-            pdto.valor = Double.parseDouble(valor);
-        }
+        pdto.login = login;
+        pdto.senha = senha;
                
         return (InterfaceDTO) pdto;
     }
     
     @Override
     public void setDados(InterfaceDTO dto) {
-        this.JTA_id.setText(String.valueOf(((ProdutoDTO) dto).id));
-        this.jTA_nome.setText(((ProdutoDTO) dto).nome);
-        this.jTA_valor.setText(String.valueOf(((ProdutoDTO) dto).valor));
+        this.JTA_id.setText(String.valueOf(((LoginDTO) dto).id));
+        this.jTA_login.setText(((LoginDTO) dto).login);
+        this.jTA_senha.setText(((LoginDTO) dto).senha);
     }
 
     @Override
     public void clear() {
         this.JTA_id.setText("");
-        this.jTA_nome.setText("");
-        this.jTA_valor.setText("");
+        this.jTA_login.setText("");
+        this.jTA_senha.setText("");
     }
 
     /**
@@ -66,11 +64,11 @@ public class ProdutoCriarPainel extends PainelInterface {
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTA_nome = new javax.swing.JTextArea();
+        jTA_login = new javax.swing.JTextArea();
         jPanel3 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTA_valor = new javax.swing.JTextArea();
+        jTA_senha = new javax.swing.JTextArea();
 
         setLayout(new java.awt.GridLayout(3, 1, 5, 5));
 
@@ -89,12 +87,12 @@ public class ProdutoCriarPainel extends PainelInterface {
 
         jPanel2.setLayout(new java.awt.BorderLayout());
 
-        jLabel2.setText("Nome");
+        jLabel2.setText("Login");
         jPanel2.add(jLabel2, java.awt.BorderLayout.CENTER);
 
-        jTA_nome.setColumns(20);
-        jTA_nome.setRows(1);
-        jScrollPane2.setViewportView(jTA_nome);
+        jTA_login.setColumns(20);
+        jTA_login.setRows(1);
+        jScrollPane2.setViewportView(jTA_login);
 
         jPanel2.add(jScrollPane2, java.awt.BorderLayout.PAGE_END);
 
@@ -102,12 +100,12 @@ public class ProdutoCriarPainel extends PainelInterface {
 
         jPanel3.setLayout(new java.awt.BorderLayout());
 
-        jLabel3.setText("Valor");
+        jLabel3.setText("Senha");
         jPanel3.add(jLabel3, java.awt.BorderLayout.CENTER);
 
-        jTA_valor.setColumns(20);
-        jTA_valor.setRows(1);
-        jScrollPane3.setViewportView(jTA_valor);
+        jTA_senha.setColumns(20);
+        jTA_senha.setRows(1);
+        jScrollPane3.setViewportView(jTA_senha);
 
         jPanel3.add(jScrollPane3, java.awt.BorderLayout.PAGE_END);
 
@@ -126,7 +124,7 @@ public class ProdutoCriarPainel extends PainelInterface {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextArea jTA_nome;
-    private javax.swing.JTextArea jTA_valor;
+    private javax.swing.JTextArea jTA_login;
+    private javax.swing.JTextArea jTA_senha;
     // End of variables declaration//GEN-END:variables
 }

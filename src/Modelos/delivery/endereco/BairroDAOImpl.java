@@ -4,6 +4,8 @@ import Conexao.Conexao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 public class BairroDAOImpl implements BairroDAO {
     
@@ -36,6 +38,31 @@ public class BairroDAOImpl implements BairroDAO {
         con.close();
         return bairro;
     }
+    
+    @Override
+    public List<Bairro> listar() throws Exception {
+        Connection con = Conexao.get();
+        
+        PreparedStatement stmt = con.prepareStatement(
+            "SELECT id, nome FROM bairro"
+        );
+        ResultSet rs = stmt.executeQuery();
+
+        List<Bairro> bairros = new ArrayList<>();
+        while (rs.next()) {
+            Bairro bairro = new Bairro();
+            bairro.setId(rs.getInt("id"));
+            bairro.setNome(rs.getString("nome"));
+            bairros.add(bairro);
+        }
+        
+        rs.close();
+        stmt.close();
+        con.close();
+        
+        return bairros;
+    }
+    
 
     @Override
     public void atualizar(Bairro bairro) throws Exception {

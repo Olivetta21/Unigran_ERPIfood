@@ -3,6 +3,8 @@ package Modelos;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import Conexao.Conexao;
 
@@ -34,6 +36,29 @@ public class StatusPedidoDAOImpl implements StatusPedidoDAO {
         }
         con.close();
         return s;
+    }
+
+    @Override
+    public List<StatusPedido> listar() throws Exception {
+        Connection con = Conexao.get();
+        PreparedStatement p = con.prepareStatement(
+            "SELECT id, progresso FROM status_pedido"
+        );
+        ResultSet rs = p.executeQuery();
+        
+        List<StatusPedido> statusPedidos = new ArrayList<>();
+        while (rs.next()) {
+            StatusPedido s = new StatusPedido();
+            s.setId(rs.getInt("id"));
+            s.setProgresso(rs.getString("progresso"));
+            statusPedidos.add(s);
+        }
+        
+        rs.close();
+        p.close();
+        con.close();
+        
+        return statusPedidos;
     }
 
     @Override

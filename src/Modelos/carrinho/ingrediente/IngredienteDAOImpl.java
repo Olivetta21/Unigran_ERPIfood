@@ -4,6 +4,8 @@ import Conexao.Conexao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 public class IngredienteDAOImpl implements IngredienteDAO {
     @Override
@@ -42,6 +44,30 @@ public class IngredienteDAOImpl implements IngredienteDAO {
         con.close();
 
         return ingrediente;
+    }
+    
+    @Override
+    public List<Ingrediente> listar() throws Exception {
+        Connection con = Conexao.get();
+        String sql = "select id, nome, valor from ingrediente";
+        PreparedStatement stmt = con.prepareStatement(sql);
+        
+        List<Ingrediente> ingredientes = new ArrayList<>();
+        
+        ResultSet rs = stmt.executeQuery();
+        while (rs.next()) {
+            Ingrediente ingrediente = new Ingrediente();
+            ingrediente.setId(rs.getInt("id"));
+            ingrediente.setNome(rs.getString("nome"));
+            ingrediente.setValor(rs.getDouble("valor"));
+            ingredientes.add(ingrediente);
+        }
+        
+        rs.close();
+        stmt.close();
+        con.close();
+        
+        return ingredientes;
     }
 
     @Override

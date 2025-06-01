@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package Interfaces.Carrinho.Produto;
+package Interfaces.delivery.endereco;
 
-import DTOs.carrinho.produto.ProdutoDTO;
+import DTOs.delivery.endereco.BairroDTO;
 import Interfaces.InterfaceDTO;
 import Interfaces.PainelInterface;
 
@@ -12,42 +12,36 @@ import Interfaces.PainelInterface;
  *
  * @author i
  */
-public class ProdutoCriarPainel extends PainelInterface {
-    public ProdutoCriarPainel() {
+public class BairroCriarPainel extends PainelInterface {
+    public BairroCriarPainel() {
         initComponents();
     }
     
     @Override
     public InterfaceDTO getData() {
-        ProdutoDTO pdto = new ProdutoDTO();
+        BairroDTO pdto = new BairroDTO();
 
         String id = this.JTA_id.getText();
         String nome = this.jTA_nome.getText();
-        String valor = this.jTA_valor.getText();
 
         if (id != null && !id.isEmpty()) {
             pdto.id = Integer.parseInt(id);
         }
         pdto.nome = nome;
-        if (valor != null && !valor.isEmpty()) {
-            pdto.valor = Double.parseDouble(valor);
-        }
                
         return (InterfaceDTO) pdto;
     }
     
     @Override
     public void setDados(InterfaceDTO dto) {
-        this.JTA_id.setText(String.valueOf(((ProdutoDTO) dto).id));
-        this.jTA_nome.setText(((ProdutoDTO) dto).nome);
-        this.jTA_valor.setText(String.valueOf(((ProdutoDTO) dto).valor));
+        this.JTA_id.setText(String.valueOf(((BairroDTO) dto).id));
+        this.jTA_nome.setText(((BairroDTO) dto).nome);
     }
 
     @Override
     public void clear() {
         this.JTA_id.setText("");
         this.jTA_nome.setText("");
-        this.jTA_valor.setText("");
     }
 
     /**
@@ -67,10 +61,6 @@ public class ProdutoCriarPainel extends PainelInterface {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTA_nome = new javax.swing.JTextArea();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTA_valor = new javax.swing.JTextArea();
 
         setLayout(new java.awt.GridLayout(3, 1, 5, 5));
 
@@ -99,19 +89,6 @@ public class ProdutoCriarPainel extends PainelInterface {
         jPanel2.add(jScrollPane2, java.awt.BorderLayout.PAGE_END);
 
         add(jPanel2);
-
-        jPanel3.setLayout(new java.awt.BorderLayout());
-
-        jLabel3.setText("Valor");
-        jPanel3.add(jLabel3, java.awt.BorderLayout.CENTER);
-
-        jTA_valor.setColumns(20);
-        jTA_valor.setRows(1);
-        jScrollPane3.setViewportView(jTA_valor);
-
-        jPanel3.add(jScrollPane3, java.awt.BorderLayout.PAGE_END);
-
-        add(jPanel3);
     }// </editor-fold>//GEN-END:initComponents
 
 
@@ -119,14 +96,10 @@ public class ProdutoCriarPainel extends PainelInterface {
     private javax.swing.JTextArea JTA_id;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTextArea jTA_nome;
-    private javax.swing.JTextArea jTA_valor;
     // End of variables declaration//GEN-END:variables
 }

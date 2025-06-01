@@ -24,6 +24,7 @@ public class CadastroGeral extends javax.swing.JDialog {
         this.pain = pain;
         pack();
         add(pain, BorderLayout.CENTER);
+        setLocationRelativeTo(parent);
         this.setVisible(true);
     }
 
@@ -62,7 +63,7 @@ public class CadastroGeral extends javax.swing.JDialog {
         });
         jPanel1.add(jB_salvar);
 
-        jB_puxarid.setText("Puxar ID");
+        jB_puxarid.setText("Puxar Por ID");
         jB_puxarid.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jB_puxaridActionPerformed(evt);
@@ -92,7 +93,7 @@ public class CadastroGeral extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jB_cancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_cancelarActionPerformed
-        // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_jB_cancelarActionPerformed
 
     private void jB_salvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB_salvarActionPerformed

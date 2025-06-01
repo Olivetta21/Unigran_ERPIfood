@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package Interfaces.Carrinho.Produto;
+package Interfaces.Carrinho.Ingrediente;
 
-import DTOs.carrinho.produto.ProdutoDTO;
+import DTOs.carrinho.ingrediente.IngredienteDTO;
 import Interfaces.InterfaceDTO;
 import Interfaces.PainelInterface;
 
@@ -12,14 +12,14 @@ import Interfaces.PainelInterface;
  *
  * @author i
  */
-public class ProdutoCriarPainel extends PainelInterface {
-    public ProdutoCriarPainel() {
+public class IngredienteCriarPainel extends PainelInterface {
+    public IngredienteCriarPainel() {
         initComponents();
     }
     
     @Override
     public InterfaceDTO getData() {
-        ProdutoDTO pdto = new ProdutoDTO();
+        IngredienteDTO pdto = new IngredienteDTO();
 
         String id = this.JTA_id.getText();
         String nome = this.jTA_nome.getText();
@@ -38,9 +38,9 @@ public class ProdutoCriarPainel extends PainelInterface {
     
     @Override
     public void setDados(InterfaceDTO dto) {
-        this.JTA_id.setText(String.valueOf(((ProdutoDTO) dto).id));
-        this.jTA_nome.setText(((ProdutoDTO) dto).nome);
-        this.jTA_valor.setText(String.valueOf(((ProdutoDTO) dto).valor));
+        this.JTA_id.setText(String.valueOf(((IngredienteDTO) dto).id));
+        this.jTA_nome.setText(((IngredienteDTO) dto).nome);
+        this.jTA_valor.setText(String.valueOf(((IngredienteDTO) dto).valor));
     }
 
     @Override
