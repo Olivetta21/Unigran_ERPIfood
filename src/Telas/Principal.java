@@ -9,12 +9,14 @@ import Controller.carrinho.ingrediente.IngredienteCTRL;
 import Controller.carrinho.produto.ProdutoCTRL;
 import Controller.contato.TelefoneCTRL;
 import Controller.delivery.endereco.BairroCTRL;
+import Controller.delivery.endereco.EnderecoCTRL;
 import Controller.login.LoginCTRL;
 import Interfaces.StatusPedidoCriarPainel;
 import Interfaces.Carrinho.Ingrediente.IngredienteCriarPainel;
 import Interfaces.Carrinho.Produto.ProdutoCriarPainel;
 import Interfaces.contato.TelefoneCriarPainel;
 import Interfaces.delivery.endereco.BairroCriarPainel;
+import Interfaces.delivery.endereco.EnderecoCriarPainel;
 import Interfaces.login.LoginCriarPainel;
 
 /**
@@ -52,6 +54,7 @@ public class Principal extends javax.swing.JFrame {
         jMBB_logins = new javax.swing.JMenuItem();
         jMBB_telefone = new javax.swing.JMenuItem();
         jMBB_statuspedido = new javax.swing.JMenuItem();
+        jMBB_endereco = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -132,6 +135,14 @@ public class Principal extends javax.swing.JFrame {
         });
         jMB_Cadastros.add(jMBB_statuspedido);
 
+        jMBB_endereco.setText("Endereço");
+        jMBB_endereco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMBB_enderecoActionPerformed(evt);
+            }
+        });
+        jMB_Cadastros.add(jMBB_endereco);
+
         jMenuBar1.add(jMB_Cadastros);
 
         setJMenuBar(jMenuBar1);
@@ -162,6 +173,10 @@ public class Principal extends javax.swing.JFrame {
     private void jMBB_statuspedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMBB_statuspedidoActionPerformed
         new CadastroGeral(null, false, new StatusPedidoCTRL(), new StatusPedidoCriarPainel());
     }//GEN-LAST:event_jMBB_statuspedidoActionPerformed
+
+    private void jMBB_enderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMBB_enderecoActionPerformed
+        new CadastroGeral(null, false, new EnderecoCTRL(), new EnderecoCriarPainel());
+    }//GEN-LAST:event_jMBB_enderecoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -203,6 +218,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuItem jMBB_Produtos;
     private javax.swing.JMenuItem jMBB_bairro;
+    private javax.swing.JMenuItem jMBB_endereco;
     private javax.swing.JMenuItem jMBB_ingredientes;
     private javax.swing.JMenuItem jMBB_logins;
     private javax.swing.JMenuItem jMBB_statuspedido;

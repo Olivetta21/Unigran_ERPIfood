@@ -1,24 +1,24 @@
 package Modelos.delivery.endereco;
 
 public class Endereco {
-    private Integer id;
-    
+    private Integer id;    
+    private String cep;
+    private Bairro bairro;    
+    private String complemento;
     private String rua;
     private String numero;
-    private String cep;
-    private Bairro bairro;
-    
-    private String complemento;
 
     public Endereco() {}
-    public Endereco(Integer id, String rua, String numero, String cep, Bairro bairro, String complemento) {
+
+    public Endereco(Integer id, String cep, Bairro bairro, String complemento, String rua, String numero) {
         this.id = id;
-        this.rua = rua;
-        this.numero = numero;
         this.cep = cep;
         this.bairro = bairro;
         this.complemento = complemento;
+        this.rua = rua;
+        this.numero = numero;
     }
+    
     public Integer getId() {
         return id;
     }
