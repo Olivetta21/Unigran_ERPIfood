@@ -1,28 +1,65 @@
 package Controller;
 
+import java.util.List;
+
 import DTOs.FuncionarioDTO;
+import Interfaces.ControllerInterface;
+import Interfaces.InterfaceDTO;
 import Modelos.Funcionario;
 import Modelos.FuncionarioDAO;
 import Modelos.FuncionarioDAOImpl;
 
-public class FuncionarioCTRL {
-    public void criar(FuncionarioDTO funcionarioDTO) throws Exception {
-        FuncionarioDAO dao = new FuncionarioDAOImpl();
-        dao.criar(funcionarioDTO.builder());
+public class FuncionarioCTRL extends ControllerInterface {
+
+    @Override
+    public void criar(InterfaceDTO funcionarioDTO) throws Exception {
+        FuncionarioDTO dto = (FuncionarioDTO) funcionarioDTO;
+        if (dto.id != null) {
+            this.atualizar(funcionarioDTO);
+            return;
+        }
+        new FuncionarioDAOImpl().criar(dto.builder());
     }
 
-    public Funcionario ler(int id) throws Exception {
-        FuncionarioDAO dao = new FuncionarioDAOImpl();
-        return dao.ler(id);
+    @Override
+    public InterfaceDTO ler(InterfaceDTO funcionarioDTO) throws Exception {
+        Funcionario func = new FuncionarioDAOImpl().ler(((FuncionarioDTO) funcionarioDTO).id);
+        return new FuncionarioDTO(func.getId(), func.getNome(), func.getTelefone(), func.getLogin(), func.getCpf(), func.getRg());
     }
 
-    public void atualizar(FuncionarioDTO funcionarioDTO) throws Exception {
-        FuncionarioDAO dao = new FuncionarioDAOImpl();
-        dao.atualizar(funcionarioDTO.builder());
+    @Override
+    public Object[][] listar() throws Exception {
+        FuncionarioDAO funcionarioDAO = new FuncionarioDAOImpl();
+        List<Funcionario> funcionarios = funcionarioDAO.listar();
+
+        Object[][] data = new Object[funcionarios.size()][7];
+
+        for (int i = 0; i < funcionarios.size(); i++) {
+            Funcionario func = funcionarios.get(i);
+            data[i][0] = func.getId();
+            data[i][1] = func.getNome();
+            data[i][2] = func.getTelefone().getDdd() + " " + func.getTelefone().getNumero();
+            data[i][3] = func.getLogin().getLogin();
+            data[i][4] = func.getLogin().getSenha();
+            data[i][5] = func.getCpf();
+            data[i][6] = func.getRg();
+        }
+
+        return data;
     }
 
-    public void deletar(int id) throws Exception {
-        FuncionarioDAO dao = new FuncionarioDAOImpl();
-        dao.deletar(id);
+    @Override
+    public String[] titulos() {
+        return new String[]{"Id", "Nome", "Telefone", "Login", "Senha", "CPF", "RG"};
+    }
+
+    @Override
+    public void atualizar(InterfaceDTO funcionarioDTO) throws Exception {
+        new FuncionarioDAOImpl().atualizar(((FuncionarioDTO) funcionarioDTO).builder());
+    }
+
+    @Override
+    public void deletar(InterfaceDTO funcionarioDTO) throws Exception {
+        new FuncionarioDAOImpl().deletar(((FuncionarioDTO) funcionarioDTO).id);
     }
 }

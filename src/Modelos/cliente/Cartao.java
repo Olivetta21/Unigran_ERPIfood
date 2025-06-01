@@ -1,18 +1,21 @@
 package Modelos.cliente;
 
+
 public class Cartao {
     private Integer id;
     private String numero;
     private Integer CVV;
-    private boolean tipo;
+    private boolean isCredito;
+    private Cliente cliente;
 
     public Cartao() {
     }
-    public Cartao(Integer id, String numero, Integer CVV, boolean tipo) {
+    public Cartao(Integer id, String numero, Integer CVV, boolean isCredito, Cliente cliente) {
         this.id = id;
         this.numero = numero;
         this.CVV = CVV;
-        this.tipo = tipo;
+        this.isCredito = isCredito;
+        this.cliente = cliente;
     }
     public Integer getId() {
         return id;
@@ -32,10 +35,16 @@ public class Cartao {
     public void setCVV(Integer CVV) {
         this.CVV = CVV;
     }
-    public boolean isTipo() {
-        return tipo;
+    public boolean isCredito() {
+        return isCredito;
     }
-    public void setTipo(boolean tipo) {
-        this.tipo = tipo;
+    public void setIsCredito(boolean tipo) {
+        this.isCredito = tipo;
+    }
+    public Cliente getCliente() {
+        return cliente;
+    }
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 }

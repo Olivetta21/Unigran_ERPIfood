@@ -61,3 +61,45 @@ create view entrega_completa as (
     from entrega e
     join endereco_completo ec on e.endereco_id = ec.id
 );
+
+create table cliente (
+    id serial not null primary key,
+    nome varchar(100) not null,
+    telefone_id integer not null references telefone(id)
+);
+
+create view cliente_completo as (
+    select c.id, c.nome, t.id as telefone_id, t.ddd, t.numero
+    from cliente c
+    join telefone t on c.telefone_id = t.id
+);
+
+create table funcionario (
+    id serial not null primary key,
+    nome varchar(100) not null,
+    telefone_id integer not null references telefone(id),
+    login_id integer not null references login(id),
+    cpf varchar(11) not null,
+    rg varchar(10) not null
+);
+
+create view funcionario_completo as (
+    select f.id, f.nome, t.id as telefone_id, t.ddd, t.numero, l.id as login_id, l.login, l.senha, f.cpf, f.rg
+    from funcionario f
+    join telefone t on f.telefone_id = t.id
+    join login l on f.login_id = l.id
+);
+
+create table cartao (
+    id serial not null primary key,
+    numero varchar(16) not null,
+    cvv varchar(3) not null,
+    isCredito boolean not null,
+    cliente_id integer not null references cliente(id)
+);
+
+create view cartao_completo as (
+    select c.id, c.numero, c.cvv, c.isCredito, cl.id as cliente_id, cl.nome
+    from cartao c
+    join cliente_completo cl on c.cliente_id = cl.id
+);

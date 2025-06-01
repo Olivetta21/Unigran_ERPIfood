@@ -1,21 +1,17 @@
 package Modelos.cliente;
 
 import Modelos.contato.Telefone;
-import java.util.List;
 
 public class Cliente {
     private Integer id;
-    private String nome;
-    private List<Cartao> cartoes;
-    
-    private List<Telefone> telefones;
+    private String nome;    
+    private Telefone telefone;
     
     public Cliente() {}
-    public Cliente(Integer id, String nome, List<Cartao> cartoes, List<Telefone> telefones) {
+    public Cliente(Integer id, String nome, Telefone telefone) {
         this.id = id;
         this.nome = nome;
-        this.cartoes = cartoes;
-        this.telefones = telefones;
+        this.telefone = telefone;
     }
     public Integer getId() {
         return id;
@@ -29,16 +25,10 @@ public class Cliente {
     public void setNome(String nome) {
         this.nome = nome;
     }
-    public List<Cartao> getCartoes() {
-        return cartoes;
+    public Telefone getTelefone() {
+        return telefone;
     }
-    public void setCartoes(List<Cartao> cartoes) {
-        this.cartoes = cartoes;
-    }
-    public List<Telefone> getTelefones() {
-        return telefones;
-    }
-    public void setTelefones(List<Telefone> telefones) {
-        this.telefones = telefones;
+    public void setTelefone(Telefone telefone) {
+        this.telefone = telefone;
     }
 }

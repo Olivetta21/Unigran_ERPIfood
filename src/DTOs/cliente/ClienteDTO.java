@@ -1,18 +1,24 @@
 package DTOs.cliente;
 
-import java.util.List;
-
-import Modelos.cliente.Cartao;
+import Interfaces.InterfaceDTO;
 import Modelos.cliente.Cliente;
 import Modelos.contato.Telefone;
 
-public class ClienteDTO {
+public class ClienteDTO extends InterfaceDTO{
     public Integer id;
-    public String nome;
-    public List<Cartao> cartoes;    
-    public List<Telefone> telefones;
+    public String nome;  
+    public Telefone telefone;
 
+    public ClienteDTO(Integer id, String nome, Telefone telefone) {
+        this.id = id;
+        this.nome = nome;
+        this.telefone = telefone;
+    }
+
+    public ClienteDTO() {
+    }
+    
     public Cliente builder() {
-        return new Cliente(id, nome, cartoes, telefones);
+        return new Cliente(id, nome, telefone);
     }
 }

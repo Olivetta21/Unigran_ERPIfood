@@ -38,6 +38,7 @@ public class TelefoneDAOImpl implements TelefoneDAO{
         if (rs.next()) {
             telefone = new Telefone();
             telefone.setId(rs.getInt("id"));
+            telefone.setDdd(rs.getString("ddd"));
             telefone.setNumero(rs.getString("numero"));
         }
 

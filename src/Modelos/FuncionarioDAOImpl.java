@@ -1,10 +1,14 @@
 package Modelos;
 
+import Modelos.contato.Telefone;
 import Modelos.login.Login;
+
+import java.util.List;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import Conexao.Conexao;
 
@@ -13,25 +17,17 @@ public class FuncionarioDAOImpl implements FuncionarioDAO{
     public void criar(Funcionario f) throws Exception {
         Connection con = Conexao.get();
 
-        PreparedStatement pc = con.prepareStatement(
-            "INSERT INTO cliente(nome) VALUES(?)", Statement.RETURN_GENERATED_KEYS);
-        pc.setString(1, f.getNome());
-        pc.executeUpdate();
+        PreparedStatement stmt = con.prepareStatement(
+            "insert into funcionario (nome, telefone_id, login_id, cpf, rg) values (?, ?, ?, ?, ?)"
+        );
+        stmt.setString(1, f.getNome());
+        stmt.setInt(2, f.getTelefone().getId());
+        stmt.setInt(3, f.getLogin().getId());
+        stmt.setString(4, f.getCpf());
+        stmt.setString(5, f.getRg());
+        stmt.executeUpdate();
 
-        ResultSet rs = pc.getGeneratedKeys();
-        int idGerado = 0;
-        if (rs.next()) {
-            idGerado = rs.getInt(1);
-        }
-
-        PreparedStatement pf = con.prepareStatement(
-            "INSERT INTO funcionario(id, cpf, rg, login_id) VALUES (?, ?, ?, ?)");
-        pf.setInt(1, idGerado);
-        pf.setString(2, f.getCpf());
-        pf.setString(3, f.getRg());
-        pf.setObject(4, f.getLogin() != null ? f.getLogin().getId() : null);
-        pf.executeUpdate();
-
+        stmt.close();
         con.close();
     }
 
@@ -39,49 +35,90 @@ public class FuncionarioDAOImpl implements FuncionarioDAO{
     public Funcionario ler(int id) throws Exception {
         Connection con = Conexao.get();
 
-        PreparedStatement p = con.prepareStatement(
-            "SELECT c.nome, f.cpf, f.rg, f.login_id FROM cliente c JOIN funcionario f ON c.id = f.id WHERE c.id = ?"
+        PreparedStatement stmt = con.prepareStatement(
+            "SELECT id, nome, telefone_id, ddd, numero, login_id, login, senha, cpf, rg from funcionario_completo WHERE id = ?"
         );
-        p.setInt(1, id);
-        ResultSet r = p.executeQuery();
-
-        Funcionario f = null;
-        if (r.next()) {
-            f = new Funcionario();
-            f.setId(id);
-            f.setNome(r.getString("nome"));
-            f.setCpf(r.getString("cpf"));
-            f.setRg(r.getString("rg"));
-
-            int loginId = r.getInt("login_id");
-            if (!r.wasNull()) {
-                Login login = new Login();                
-                login.setId(loginId);
-                f.setLogin(login);
-            }
+        stmt.setInt(1, id);
+        ResultSet rs = stmt.executeQuery();
+        
+        Funcionario func = null;
+        if (rs.next()) {
+            func = new Funcionario();
+            func.setId(rs.getInt("id"));
+            func.setNome(rs.getString("nome"));
+            func.setTelefone(new Telefone(
+                rs.getInt("telefone_id"),
+                rs.getString("ddd"),
+                rs.getString("numero")
+            ));
+            func.setLogin(new Login(
+                rs.getInt("login_id"),
+                rs.getString("login"),
+                rs.getString("senha")
+            ));
+            func.setCpf(rs.getString("cpf"));
+            func.setRg(rs.getString("rg"));
         }
 
+        rs.close();
+        stmt.close();   
         con.close();
-        return f;
+
+        return func;
+    }
+
+    @Override
+    public List<Funcionario> listar() throws Exception {
+        Connection con = Conexao.get();
+
+        PreparedStatement stmt = con.prepareStatement(
+            "SELECT id, nome, telefone_id, ddd, numero, login_id, login, senha, cpf, rg FROM funcionario_completo"
+        );
+        ResultSet rs = stmt.executeQuery();
+
+        List<Funcionario> funcionarios = new ArrayList<>();
+        while (rs.next()) {
+            Funcionario func = new Funcionario();
+            func.setId(rs.getInt("id"));
+            func.setNome(rs.getString("nome"));
+            func.setTelefone(new Telefone(
+                rs.getInt("telefone_id"),
+                rs.getString("ddd"),
+                rs.getString("numero")
+            ));
+            func.setLogin(new Login(
+                rs.getInt("login_id"),
+                rs.getString("login"),
+                rs.getString("senha")
+            ));
+            func.setCpf(rs.getString("cpf"));
+            func.setRg(rs.getString("rg"));
+            funcionarios.add(func);
+        }
+
+        rs.close();
+        stmt.close();
+        con.close();
+
+        return funcionarios;
     }
 
     @Override
     public void atualizar(Funcionario f) throws Exception {
         Connection con = Conexao.get();
 
-        PreparedStatement pc = con.prepareStatement("UPDATE cliente SET nome = ? WHERE id = ?");
-        pc.setString(1, f.getNome());
-        pc.setInt(2, f.getId());
-        pc.executeUpdate();
+        PreparedStatement stmt = con.prepareStatement(
+            "UPDATE funcionario SET nome = ?, telefone_id = ?, login_id = ?, cpf = ?, rg = ? WHERE id = ?"
+        );
+        stmt.setString(1, f.getNome());
+        stmt.setInt(2, f.getTelefone().getId());
+        stmt.setInt(3, f.getLogin().getId());
+        stmt.setString(4, f.getCpf());
+        stmt.setString(5, f.getRg());
+        stmt.setInt(6, f.getId());
+        stmt.executeUpdate();
 
-        PreparedStatement pf = con.prepareStatement(
-            "UPDATE funcionario SET cpf = ?, rg = ?, login_id = ? WHERE id = ?");
-        pf.setString(1, f.getCpf());
-        pf.setString(2, f.getRg());
-        pf.setObject(3, f.getLogin() != null ? f.getLogin().getId() : null);
-        pf.setInt(4, f.getId());
-        pf.executeUpdate();
-
+        stmt.close();
         con.close();
     }
 
