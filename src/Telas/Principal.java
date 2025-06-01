@@ -8,6 +8,7 @@ import Controller.StatusPedidoCTRL;
 import Controller.carrinho.ingrediente.IngredienteCTRL;
 import Controller.carrinho.produto.ProdutoCTRL;
 import Controller.contato.TelefoneCTRL;
+import Controller.delivery.EntregaCTRL;
 import Controller.delivery.endereco.BairroCTRL;
 import Controller.delivery.endereco.EnderecoCTRL;
 import Controller.login.LoginCTRL;
@@ -15,6 +16,7 @@ import Interfaces.StatusPedidoCriarPainel;
 import Interfaces.Carrinho.Ingrediente.IngredienteCriarPainel;
 import Interfaces.Carrinho.Produto.ProdutoCriarPainel;
 import Interfaces.contato.TelefoneCriarPainel;
+import Interfaces.delivery.EntregaCriarPainel;
 import Interfaces.delivery.endereco.BairroCriarPainel;
 import Interfaces.delivery.endereco.EnderecoCriarPainel;
 import Interfaces.login.LoginCriarPainel;
@@ -48,13 +50,17 @@ public class Principal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMB_Cadastros = new javax.swing.JMenu();
-        jMBB_Produtos = new javax.swing.JMenuItem();
-        jMBB_ingredientes = new javax.swing.JMenuItem();
-        jMBB_bairro = new javax.swing.JMenuItem();
+        jMBB_statuspedido = new javax.swing.JMenuItem();
+        jSeparator3 = new javax.swing.JPopupMenu.Separator();
         jMBB_logins = new javax.swing.JMenuItem();
         jMBB_telefone = new javax.swing.JMenuItem();
-        jMBB_statuspedido = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        jMBB_bairro = new javax.swing.JMenuItem();
         jMBB_endereco = new javax.swing.JMenuItem();
+        jMBB_entregas = new javax.swing.JMenuItem();
+        jSeparator2 = new javax.swing.JPopupMenu.Separator();
+        jMBB_ingredientes = new javax.swing.JMenuItem();
+        jMBB_Produtos = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -87,29 +93,14 @@ public class Principal extends javax.swing.JFrame {
 
         jMB_Cadastros.setText("Cadastros");
 
-        jMBB_Produtos.setText("Produtos");
-        jMBB_Produtos.addActionListener(new java.awt.event.ActionListener() {
+        jMBB_statuspedido.setText("Status Pedidos");
+        jMBB_statuspedido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMBB_ProdutosActionPerformed(evt);
+                jMBB_statuspedidoActionPerformed(evt);
             }
         });
-        jMB_Cadastros.add(jMBB_Produtos);
-
-        jMBB_ingredientes.setText("Ingredientes");
-        jMBB_ingredientes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMBB_ingredientesActionPerformed(evt);
-            }
-        });
-        jMB_Cadastros.add(jMBB_ingredientes);
-
-        jMBB_bairro.setText("Bairro");
-        jMBB_bairro.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMBB_bairroActionPerformed(evt);
-            }
-        });
-        jMB_Cadastros.add(jMBB_bairro);
+        jMB_Cadastros.add(jMBB_statuspedido);
+        jMB_Cadastros.add(jSeparator3);
 
         jMBB_logins.setText("Logins");
         jMBB_logins.addActionListener(new java.awt.event.ActionListener() {
@@ -126,14 +117,15 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jMB_Cadastros.add(jMBB_telefone);
+        jMB_Cadastros.add(jSeparator1);
 
-        jMBB_statuspedido.setText("Status Pedidos");
-        jMBB_statuspedido.addActionListener(new java.awt.event.ActionListener() {
+        jMBB_bairro.setText("Bairro");
+        jMBB_bairro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMBB_statuspedidoActionPerformed(evt);
+                jMBB_bairroActionPerformed(evt);
             }
         });
-        jMB_Cadastros.add(jMBB_statuspedido);
+        jMB_Cadastros.add(jMBB_bairro);
 
         jMBB_endereco.setText("Endereço");
         jMBB_endereco.addActionListener(new java.awt.event.ActionListener() {
@@ -142,6 +134,31 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jMB_Cadastros.add(jMBB_endereco);
+
+        jMBB_entregas.setText("Entregas");
+        jMBB_entregas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMBB_entregasActionPerformed(evt);
+            }
+        });
+        jMB_Cadastros.add(jMBB_entregas);
+        jMB_Cadastros.add(jSeparator2);
+
+        jMBB_ingredientes.setText("Ingredientes");
+        jMBB_ingredientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMBB_ingredientesActionPerformed(evt);
+            }
+        });
+        jMB_Cadastros.add(jMBB_ingredientes);
+
+        jMBB_Produtos.setText("Produtos");
+        jMBB_Produtos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMBB_ProdutosActionPerformed(evt);
+            }
+        });
+        jMB_Cadastros.add(jMBB_Produtos);
 
         jMenuBar1.add(jMB_Cadastros);
 
@@ -177,6 +194,10 @@ public class Principal extends javax.swing.JFrame {
     private void jMBB_enderecoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMBB_enderecoActionPerformed
         new CadastroGeral(null, false, new EnderecoCTRL(), new EnderecoCriarPainel());
     }//GEN-LAST:event_jMBB_enderecoActionPerformed
+
+    private void jMBB_entregasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMBB_entregasActionPerformed
+        new CadastroGeral(null, false, new EntregaCTRL(), new EntregaCriarPainel()); 
+    }//GEN-LAST:event_jMBB_entregasActionPerformed
 
     /**
      * @param args the command line arguments
@@ -219,6 +240,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMBB_Produtos;
     private javax.swing.JMenuItem jMBB_bairro;
     private javax.swing.JMenuItem jMBB_endereco;
+    private javax.swing.JMenuItem jMBB_entregas;
     private javax.swing.JMenuItem jMBB_ingredientes;
     private javax.swing.JMenuItem jMBB_logins;
     private javax.swing.JMenuItem jMBB_statuspedido;
@@ -227,5 +249,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JPopupMenu.Separator jSeparator2;
+    private javax.swing.JPopupMenu.Separator jSeparator3;
     // End of variables declaration//GEN-END:variables
 }

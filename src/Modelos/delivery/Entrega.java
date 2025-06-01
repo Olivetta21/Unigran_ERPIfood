@@ -13,6 +13,7 @@ public class Entrega {
         this.id = id;
         this.chave = chave;
         this.endereco = endereco;
+        this.valor = valor;
     }
 
     public Integer getId() {

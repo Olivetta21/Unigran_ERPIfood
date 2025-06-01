@@ -22,8 +22,8 @@ public class CadastroGeral extends javax.swing.JDialog {
         initComponents();
         this.ctrl = ctrl;
         this.pain = pain;
-        pack();
         add(pain, BorderLayout.CENTER);
+        pack();
         setLocationRelativeTo(parent);
         this.setVisible(true);
     }
@@ -45,7 +45,10 @@ public class CadastroGeral extends javax.swing.JDialog {
         jB_deletar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(400, 300));
+        setMinimumSize(new java.awt.Dimension(400, 50));
+
+        jPanel1.setMinimumSize(new java.awt.Dimension(442, 35));
+        jPanel1.setPreferredSize(new java.awt.Dimension(442, 35));
 
         jB_cancelar.setText("Cancelar");
         jB_cancelar.addActionListener(new java.awt.event.ActionListener() {

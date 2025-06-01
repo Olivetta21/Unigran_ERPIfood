@@ -62,7 +62,9 @@ public class BairroCriarPainel extends PainelInterface {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTA_nome = new javax.swing.JTextArea();
 
-        setLayout(new java.awt.GridLayout(3, 1, 5, 5));
+        setMinimumSize(new java.awt.Dimension(33, 154));
+        setPreferredSize(new java.awt.Dimension(238, 150));
+        setLayout(new java.awt.GridLayout(2, 1, 5, 5));
 
         jPanel1.setLayout(new java.awt.BorderLayout());
 

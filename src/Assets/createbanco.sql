@@ -47,4 +47,17 @@ create view endereco_completo as (
     select e.id, e.cep, b.id as bairro_id, b.nome as bairro_nome, e.complemento, e.rua, e.numero
     from endereco e
     join bairro b on e.bairro_id = b.id
-); 
+);
+
+create table entrega (
+    id serial not null primary key,
+    chave varchar(100) not null,
+    endereco_id integer not null references endereco(id),
+    valor decimal(10,2) not null
+);
+
+create view entrega_completa as (
+    select e.id, e.chave, ec.id as ender_id, ec.cep, ec.bairro_id, ec.bairro_nome, ec.complemento, ec.rua, ec.numero, e.valor
+    from entrega e
+    join endereco_completo ec on e.endereco_id = ec.id
+);
