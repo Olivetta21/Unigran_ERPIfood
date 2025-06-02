@@ -103,3 +103,26 @@ create view cartao_completo as (
     from cartao c
     join cliente_completo cl on c.cliente_id = cl.id
 );
+
+create table pedido (
+    id serial not null primary key,
+    cliente_id integer not null references cliente(id),
+    data_pedido timestamp not null default current_timestamp,
+    status_pedido_id integer not null references status_pedido(id),
+    entrega_id integer not null references entrega(id),
+    reembolsado varchar(100)
+);
+
+create view pedido_completo as (
+    select  p.id,
+            c.id as cliente_id, c.nome as cliente_nome,
+            p.data_pedido,
+            sp.id as status_id, sp.progresso as status_progresso,
+            e.id as entrega_id, e.chave, e.ender_id, e.cep, e.bairro_id, e.bairro_nome, e.complemento, e.rua, e.numero, e.valor,
+            p.reembolsado
+    from pedido p
+    join cliente c on p.cliente_id = c.id
+    join status_pedido sp on p.status_pedido_id = sp.id
+    join entrega_completa e on p.entrega_id = e.id
+);
+

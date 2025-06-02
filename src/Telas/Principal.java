@@ -5,6 +5,7 @@
 package Telas;
 
 import Controller.FuncionarioCTRL;
+import Controller.PedidoCTRL;
 import Controller.StatusPedidoCTRL;
 import Controller.carrinho.ingrediente.IngredienteCTRL;
 import Controller.carrinho.produto.ProdutoCTRL;
@@ -19,6 +20,7 @@ import Interfaces.StatusPedidoCriarPainel;
 import Interfaces.Carrinho.Ingrediente.IngredienteCriarPainel;
 import Interfaces.Carrinho.Produto.ProdutoCriarPainel;
 import Interfaces.FuncionarioCriarPainel;
+import Interfaces.PedidoCriarPainel;
 import Interfaces.cliente.CartaoCriarPainel;
 import Interfaces.cliente.ClienteCriarPainel;
 import Interfaces.contato.TelefoneCriarPainel;
@@ -57,6 +59,7 @@ public class Principal extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMB_Cadastros = new javax.swing.JMenu();
         jMBB_statuspedido = new javax.swing.JMenuItem();
+        jMBB_pedidos = new javax.swing.JMenuItem();
         jSeparator3 = new javax.swing.JPopupMenu.Separator();
         jMBB_logins = new javax.swing.JMenuItem();
         jMBB_funcionarios = new javax.swing.JMenuItem();
@@ -109,6 +112,14 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jMB_Cadastros.add(jMBB_statuspedido);
+
+        jMBB_pedidos.setText("Pedidos");
+        jMBB_pedidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMBB_pedidosActionPerformed(evt);
+            }
+        });
+        jMB_Cadastros.add(jMBB_pedidos);
         jMB_Cadastros.add(jSeparator3);
 
         jMBB_logins.setText("Logins Funcionarios");
@@ -244,6 +255,10 @@ public class Principal extends javax.swing.JFrame {
         new CadastroGeral(null, false, new CartaoCTRL(), new CartaoCriarPainel());
     }//GEN-LAST:event_jMBB_cartoesclientesActionPerformed
 
+    private void jMBB_pedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMBB_pedidosActionPerformed
+        new CadastroGeral(null, false, new PedidoCTRL(), new PedidoCriarPainel());
+    }//GEN-LAST:event_jMBB_pedidosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -291,6 +306,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMBB_funcionarios;
     private javax.swing.JMenuItem jMBB_ingredientes;
     private javax.swing.JMenuItem jMBB_logins;
+    private javax.swing.JMenuItem jMBB_pedidos;
     private javax.swing.JMenuItem jMBB_statuspedido;
     private javax.swing.JMenuItem jMBB_telefone;
     private javax.swing.JMenu jMB_Cadastros;
