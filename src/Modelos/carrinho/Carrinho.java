@@ -1,22 +1,21 @@
 package Modelos.carrinho;
 
-import Modelos.carrinho.ingrediente.IngredienteEscolha;
+import Modelos.Pedido;
 import Modelos.carrinho.produto.Produto;
-import java.util.List;
 
 public class Carrinho {
     private Integer id;
     private Produto produto;
+    private Pedido pedido;
     private Integer quantidade;
-    private List<IngredienteEscolha> ingredienteEscolha;
 
     public Carrinho() {
     }
-    public Carrinho(Integer id, Produto produto, Integer quantidade, List<IngredienteEscolha> ingredienteEscolha) {
+    public Carrinho(Integer id, Produto produto, Pedido pedido, Integer quantidade) {
         this.id = id;
         this.produto = produto;
+        this.pedido = pedido;
         this.quantidade = quantidade;
-        this.ingredienteEscolha = ingredienteEscolha;
     }
     public Integer getId() {
         return id;
@@ -36,10 +35,11 @@ public class Carrinho {
     public void setQuantidade(Integer quantidade) {
         this.quantidade = quantidade;
     }
-    public List<IngredienteEscolha> getIngredienteEscolha() {
-        return ingredienteEscolha;
+    public Pedido getPedido() {
+        return pedido;
     }
-    public void setIngredienteEscolha(List<IngredienteEscolha> ingredienteEscolha) {
-        this.ingredienteEscolha = ingredienteEscolha;
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
     }
+
 }

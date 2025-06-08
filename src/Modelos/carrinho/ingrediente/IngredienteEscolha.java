@@ -1,17 +1,20 @@
 package Modelos.carrinho.ingrediente;
 
+import Modelos.carrinho.Carrinho;
 
 public class IngredienteEscolha {
     private Integer id;
-    private Boolean toExclude;
     private Ingrediente ingrediente;
+    private Carrinho carrinho;
+    private Boolean toExclude;
 
     public IngredienteEscolha() {
     }
-    public IngredienteEscolha(Integer id, Boolean toExclude, Ingrediente ingrediente) {
+    public IngredienteEscolha(Integer id, Ingrediente ingrediente, Carrinho carrinho, Boolean toExclude) {
         this.id = id;
-        this.toExclude = toExclude;
         this.ingrediente = ingrediente;
+        this.carrinho = carrinho;
+        this.toExclude = toExclude;
     }
 
     public Integer getId() {
@@ -28,6 +31,13 @@ public class IngredienteEscolha {
 
     public void setToExclude(Boolean toExclude) {
         this.toExclude = toExclude;
+    }
+
+    public Carrinho getCarrinho() {
+        return carrinho;
+    }
+    public void setCarrinho(Carrinho carrinho) {
+        this.carrinho = carrinho;
     }
 
     public Ingrediente getIngrediente() {

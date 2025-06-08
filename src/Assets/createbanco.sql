@@ -126,3 +126,29 @@ create view pedido_completo as (
     join entrega_completa e on p.entrega_id = e.id
 );
 
+create table carrinho (
+    id serial not null primary key,
+    pedido_id integer not null references pedido(id),
+    produto_id integer not null references produto(id),
+    quantidade integer not null
+);
+
+create view carrinho_completo as (
+    select c.id, c.pedido_id, p.id as produto_id, p.nome as produto_nome, p.valor as produto_valor, c.quantidade
+    from carrinho c
+    join produto p on c.produto_id = p.id
+);
+
+
+create table ingrediente_escolha (
+    id serial not null primary key,
+    ingrediente_id integer not null references ingrediente(id),
+    carrinho_id integer not null references carrinho(id),
+    toExclude boolean not null default false
+);
+
+create view ingrediente_escolha_completo as (
+    select pe.id, pe.ingrediente_id, i.nome as ingrediente_nome, i.valor as ingrediente_valor, pe.carrinho_id, pe.toExclude
+    from ingrediente_escolha pe
+    join ingrediente i on pe.ingrediente_id = i.id
+);

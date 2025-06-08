@@ -7,7 +7,9 @@ package Telas;
 import Controller.FuncionarioCTRL;
 import Controller.PedidoCTRL;
 import Controller.StatusPedidoCTRL;
+import Controller.carrinho.CarrinhoCTRL;
 import Controller.carrinho.ingrediente.IngredienteCTRL;
+import Controller.carrinho.ingrediente.IngredienteEscolhaCTRL;
 import Controller.carrinho.produto.ProdutoCTRL;
 import Controller.cliente.CartaoCTRL;
 import Controller.cliente.ClienteCTRL;
@@ -16,8 +18,10 @@ import Controller.delivery.EntregaCTRL;
 import Controller.delivery.endereco.BairroCTRL;
 import Controller.delivery.endereco.EnderecoCTRL;
 import Controller.login.LoginCTRL;
+import Interfaces.Carrinho.CarrinhoCriarPainel;
 import Interfaces.StatusPedidoCriarPainel;
 import Interfaces.Carrinho.Ingrediente.IngredienteCriarPainel;
+import Interfaces.Carrinho.Ingrediente.IngredienteEscolhaCriarPainel;
 import Interfaces.Carrinho.Produto.ProdutoCriarPainel;
 import Interfaces.FuncionarioCriarPainel;
 import Interfaces.PedidoCriarPainel;
@@ -73,6 +77,8 @@ public class Principal extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         jMBB_ingredientes = new javax.swing.JMenuItem();
         jMBB_Produtos = new javax.swing.JMenuItem();
+        jMBB_carrinho = new javax.swing.JMenuItem();
+        jMBB_ingredienteEscolha = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -204,6 +210,22 @@ public class Principal extends javax.swing.JFrame {
         });
         jMB_Cadastros.add(jMBB_Produtos);
 
+        jMBB_carrinho.setText("Carrinho");
+        jMBB_carrinho.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMBB_carrinhoActionPerformed(evt);
+            }
+        });
+        jMB_Cadastros.add(jMBB_carrinho);
+
+        jMBB_ingredienteEscolha.setText("Ingrediente Escolha");
+        jMBB_ingredienteEscolha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMBB_ingredienteEscolhaActionPerformed(evt);
+            }
+        });
+        jMB_Cadastros.add(jMBB_ingredienteEscolha);
+
         jMenuBar1.add(jMB_Cadastros);
 
         setJMenuBar(jMenuBar1);
@@ -259,6 +281,14 @@ public class Principal extends javax.swing.JFrame {
         new CadastroGeral(null, false, new PedidoCTRL(), new PedidoCriarPainel());
     }//GEN-LAST:event_jMBB_pedidosActionPerformed
 
+    private void jMBB_carrinhoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMBB_carrinhoActionPerformed
+        new CadastroGeral(null, false, new CarrinhoCTRL(), new CarrinhoCriarPainel());
+    }//GEN-LAST:event_jMBB_carrinhoActionPerformed
+
+    private void jMBB_ingredienteEscolhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMBB_ingredienteEscolhaActionPerformed
+        new CadastroGeral(null, false, new IngredienteEscolhaCTRL(), new IngredienteEscolhaCriarPainel());
+    }//GEN-LAST:event_jMBB_ingredienteEscolhaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -299,11 +329,13 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuItem jMBB_Produtos;
     private javax.swing.JMenuItem jMBB_bairro;
+    private javax.swing.JMenuItem jMBB_carrinho;
     private javax.swing.JMenuItem jMBB_cartoesclientes;
     private javax.swing.JMenuItem jMBB_clientes;
     private javax.swing.JMenuItem jMBB_endereco;
     private javax.swing.JMenuItem jMBB_entregas;
     private javax.swing.JMenuItem jMBB_funcionarios;
+    private javax.swing.JMenuItem jMBB_ingredienteEscolha;
     private javax.swing.JMenuItem jMBB_ingredientes;
     private javax.swing.JMenuItem jMBB_logins;
     private javax.swing.JMenuItem jMBB_pedidos;
