@@ -1,21 +1,21 @@
 package Modelos.pagamento;
 
-import Modelos.pagamento.cupom.Cupom;
+import Modelos.Pedido;
 
 public class Pagamento {
     private Integer id;
+    private Pedido pedido;
     private Double pix;
-    private Double cartao;
     private Double dinheiro;
-    private Cupom cupom;
+    private Double cartao;
 
     public Pagamento() {}
-    public Pagamento(Integer id, Double pix, Double cartao, Double dinheiro, Cupom cupom) {
+    public Pagamento(Integer id, Pedido pedido, Double pix, Double dinheiro, Double cartao) {
         this.id = id;
+        this.pedido = pedido;
         this.pix = pix;
-        this.cartao = cartao;
         this.dinheiro = dinheiro;
-        this.cupom = cupom;
+        this.cartao = cartao;
     }
 
     public Integer getId() {
@@ -24,6 +24,14 @@ public class Pagamento {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Pedido getPedido() {
+        return pedido;
+    }
+
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
     }
 
     public Double getPix() {
@@ -49,15 +57,4 @@ public class Pagamento {
     public void setDinheiro(Double dinheiro) {
         this.dinheiro = dinheiro;
     }
-
-    public Cupom getCupom() {
-        return cupom;
-    }
-
-    public void setCupom(Cupom cupom) {
-        this.cupom = cupom;
-    }
-    
-    
-    
 }

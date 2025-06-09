@@ -3,8 +3,11 @@ package Modelos.pagamento;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 
 import Conexao.Conexao;
+import Modelos.Pedido;
 import Modelos.pagamento.cupom.CupomDAOImpl;
 
 public class PagamentoDAOImpl implements PagamentoDAO {
@@ -13,12 +16,12 @@ public class PagamentoDAOImpl implements PagamentoDAO {
         Connection con = Conexao.get();
 
         PreparedStatement stmt = con.prepareStatement(
-            "INSERT INTO pagamento (pix, cartao, dinheiro, cupom_id) VALUES (?, ?, ?, ?)"
+            "INSERT INTO pagamento (pedido_id, pix, dinheiro, cartao) VALUES (?, ?, ?, ?)"
         );
-        stmt.setDouble(1, pagamento.getPix());
-        stmt.setDouble(2, pagamento.getCartao());
+        stmt.setInt(1, pagamento.getPedido().getId());
+        stmt.setDouble(2, pagamento.getPix());
         stmt.setDouble(3, pagamento.getDinheiro());
-        stmt.setInt(4, pagamento.getCupom().getId());
+        stmt.setDouble(4, pagamento.getCartao());
         stmt.executeUpdate();
 
         stmt.close();
@@ -30,7 +33,7 @@ public class PagamentoDAOImpl implements PagamentoDAO {
         Connection con = Conexao.get();
 
         PreparedStatement stmt = con.prepareStatement(
-            "SELECT id, pix, cartao, dinheiro FROM pagamento WHERE id = ?"
+            "SELECT id, pedido_id, pix, dinheiro, cartao FROM pagamento WHERE id = ?"
         );
         stmt.setInt(1, id);
         ResultSet rs = stmt.executeQuery();
@@ -39,10 +42,10 @@ public class PagamentoDAOImpl implements PagamentoDAO {
         if (rs.next()) {
             pagamento = new Pagamento(
                 rs.getInt("id"),
+                new Pedido(rs.getInt("pedido_id"), null, null, null, null, null),
                 rs.getDouble("pix"),
-                rs.getDouble("cartao"),
                 rs.getDouble("dinheiro"),
-                new CupomDAOImpl().ler(rs.getInt("cupom_id"))
+                rs.getDouble("cartao")
             );
         }
 
@@ -52,15 +55,42 @@ public class PagamentoDAOImpl implements PagamentoDAO {
     }
 
     @Override
+    public List<Pagamento> listar() throws Exception {
+        Connection con = Conexao.get();
+
+        PreparedStatement stmt = con.prepareStatement(
+            "SELECT id, pedido_id, pix, dinheiro, cartao FROM pagamento"
+        );
+        ResultSet rs = stmt.executeQuery();
+
+        List<Pagamento> pagamentos = new ArrayList<>();
+        while (rs.next()) {
+            Pagamento pagamento = new Pagamento(
+                rs.getInt("id"),
+                new Pedido(rs.getInt("pedido_id"), null, null, null, null, null),
+                rs.getDouble("pix"),
+                rs.getDouble("dinheiro"),
+                rs.getDouble("cartao")
+            );
+            pagamentos.add(pagamento);
+        }
+
+        stmt.close();
+        con.close();
+        return pagamentos;
+    }
+
+    @Override
     public void atualizar(Pagamento pagamento) throws Exception {
         Connection con = Conexao.get();
+
         PreparedStatement stmt = con.prepareStatement(
-            "UPDATE pagamento SET pix = ?, cartao = ?, dinheiro = ?, cupom_id = ? WHERE id = ?"
+            "UPDATE pagamento SET pedido_id = ?, pix = ?, dinheiro = ?, cartao = ? WHERE id = ?"
         );
-        stmt.setDouble(1, pagamento.getPix());
-        stmt.setDouble(2, pagamento.getCartao());
+        stmt.setInt(1, pagamento.getPedido().getId());
+        stmt.setDouble(2, pagamento.getPix());
         stmt.setDouble(3, pagamento.getDinheiro());
-        stmt.setInt(4, pagamento.getCupom().getId());
+        stmt.setDouble(4, pagamento.getCartao());
         stmt.setInt(5, pagamento.getId());
         stmt.executeUpdate();
 

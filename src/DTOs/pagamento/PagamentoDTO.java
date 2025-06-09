@@ -1,17 +1,28 @@
 package DTOs.pagamento;
 
+import Interfaces.InterfaceDTO;
+import Modelos.Pedido;
 import Modelos.pagamento.Pagamento;
-import Modelos.pagamento.cupom.Cupom;
 
-public class PagamentoDTO {
+public class PagamentoDTO extends InterfaceDTO {
     public Integer id;
+    public Pedido pedido;
     public Double pix;
     public Double cartao;
     public Double dinheiro;
-    public Cupom cupom;
+
+    public PagamentoDTO() {
+    }
+    public PagamentoDTO(Integer id, Pedido pedido, Double pix, Double cartao, Double dinheiro) {
+        this.id = id;
+        this.pedido = pedido;
+        this.pix = pix;
+        this.cartao = cartao;
+        this.dinheiro = dinheiro;
+    }
 
     public Pagamento builder() {
-        return new Pagamento(id, pix, cartao, dinheiro, cupom);
+        return new Pagamento(id, pedido, pix, cartao, dinheiro);
     }
     
 }

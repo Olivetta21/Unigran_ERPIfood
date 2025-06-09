@@ -18,12 +18,16 @@ import Controller.delivery.EntregaCTRL;
 import Controller.delivery.endereco.BairroCTRL;
 import Controller.delivery.endereco.EnderecoCTRL;
 import Controller.login.LoginCTRL;
+import Controller.pagamento.PagamentoCTRL;
+import Controller.pagamento.cupom.CupomCTRL;
 import Interfaces.Carrinho.CarrinhoCriarPainel;
 import Interfaces.StatusPedidoCriarPainel;
 import Interfaces.Carrinho.Ingrediente.IngredienteCriarPainel;
 import Interfaces.Carrinho.Ingrediente.IngredienteEscolhaCriarPainel;
 import Interfaces.Carrinho.Produto.ProdutoCriarPainel;
 import Interfaces.FuncionarioCriarPainel;
+import Interfaces.Pagamento.PagamentoCriarPainel;
+import Interfaces.Pagamento.cupom.CupomCriarPainel;
 import Interfaces.PedidoCriarPainel;
 import Interfaces.cliente.CartaoCriarPainel;
 import Interfaces.cliente.ClienteCriarPainel;
@@ -62,9 +66,6 @@ public class Principal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMB_Cadastros = new javax.swing.JMenu();
-        jMBB_statuspedido = new javax.swing.JMenuItem();
-        jMBB_pedidos = new javax.swing.JMenuItem();
-        jSeparator3 = new javax.swing.JPopupMenu.Separator();
         jMBB_logins = new javax.swing.JMenuItem();
         jMBB_funcionarios = new javax.swing.JMenuItem();
         jMBB_telefone = new javax.swing.JMenuItem();
@@ -74,11 +75,17 @@ public class Principal extends javax.swing.JFrame {
         jMBB_bairro = new javax.swing.JMenuItem();
         jMBB_endereco = new javax.swing.JMenuItem();
         jMBB_entregas = new javax.swing.JMenuItem();
+        jSeparator3 = new javax.swing.JPopupMenu.Separator();
+        jMBB_statuspedido = new javax.swing.JMenuItem();
+        jMBB_pedidos = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         jMBB_ingredientes = new javax.swing.JMenuItem();
         jMBB_Produtos = new javax.swing.JMenuItem();
         jMBB_carrinho = new javax.swing.JMenuItem();
         jMBB_ingredienteEscolha = new javax.swing.JMenuItem();
+        jSeparator4 = new javax.swing.JPopupMenu.Separator();
+        jMBB_pagamento = new javax.swing.JMenuItem();
+        jMBB_cupom = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -110,23 +117,6 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().add(jPanel2, java.awt.BorderLayout.CENTER);
 
         jMB_Cadastros.setText("Cadastros");
-
-        jMBB_statuspedido.setText("Status Pedidos");
-        jMBB_statuspedido.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMBB_statuspedidoActionPerformed(evt);
-            }
-        });
-        jMB_Cadastros.add(jMBB_statuspedido);
-
-        jMBB_pedidos.setText("Pedidos");
-        jMBB_pedidos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMBB_pedidosActionPerformed(evt);
-            }
-        });
-        jMB_Cadastros.add(jMBB_pedidos);
-        jMB_Cadastros.add(jSeparator3);
 
         jMBB_logins.setText("Logins Funcionarios");
         jMBB_logins.addActionListener(new java.awt.event.ActionListener() {
@@ -192,6 +182,23 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jMB_Cadastros.add(jMBB_entregas);
+        jMB_Cadastros.add(jSeparator3);
+
+        jMBB_statuspedido.setText("Status Pedidos");
+        jMBB_statuspedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMBB_statuspedidoActionPerformed(evt);
+            }
+        });
+        jMB_Cadastros.add(jMBB_statuspedido);
+
+        jMBB_pedidos.setText("Pedidos");
+        jMBB_pedidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMBB_pedidosActionPerformed(evt);
+            }
+        });
+        jMB_Cadastros.add(jMBB_pedidos);
         jMB_Cadastros.add(jSeparator2);
 
         jMBB_ingredientes.setText("Ingredientes");
@@ -225,6 +232,23 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jMB_Cadastros.add(jMBB_ingredienteEscolha);
+        jMB_Cadastros.add(jSeparator4);
+
+        jMBB_pagamento.setText("Pagamento");
+        jMBB_pagamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMBB_pagamentoActionPerformed(evt);
+            }
+        });
+        jMB_Cadastros.add(jMBB_pagamento);
+
+        jMBB_cupom.setText("Cupom");
+        jMBB_cupom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMBB_cupomActionPerformed(evt);
+            }
+        });
+        jMB_Cadastros.add(jMBB_cupom);
 
         jMenuBar1.add(jMB_Cadastros);
 
@@ -289,6 +313,14 @@ public class Principal extends javax.swing.JFrame {
         new CadastroGeral(null, false, new IngredienteEscolhaCTRL(), new IngredienteEscolhaCriarPainel());
     }//GEN-LAST:event_jMBB_ingredienteEscolhaActionPerformed
 
+    private void jMBB_pagamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMBB_pagamentoActionPerformed
+        new CadastroGeral(null, false, new PagamentoCTRL(), new PagamentoCriarPainel());
+    }//GEN-LAST:event_jMBB_pagamentoActionPerformed
+
+    private void jMBB_cupomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMBB_cupomActionPerformed
+        new CadastroGeral(null, false, new CupomCTRL(), new CupomCriarPainel());
+    }//GEN-LAST:event_jMBB_cupomActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -332,12 +364,14 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMBB_carrinho;
     private javax.swing.JMenuItem jMBB_cartoesclientes;
     private javax.swing.JMenuItem jMBB_clientes;
+    private javax.swing.JMenuItem jMBB_cupom;
     private javax.swing.JMenuItem jMBB_endereco;
     private javax.swing.JMenuItem jMBB_entregas;
     private javax.swing.JMenuItem jMBB_funcionarios;
     private javax.swing.JMenuItem jMBB_ingredienteEscolha;
     private javax.swing.JMenuItem jMBB_ingredientes;
     private javax.swing.JMenuItem jMBB_logins;
+    private javax.swing.JMenuItem jMBB_pagamento;
     private javax.swing.JMenuItem jMBB_pedidos;
     private javax.swing.JMenuItem jMBB_statuspedido;
     private javax.swing.JMenuItem jMBB_telefone;
@@ -348,5 +382,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
+    private javax.swing.JPopupMenu.Separator jSeparator4;
     // End of variables declaration//GEN-END:variables
 }

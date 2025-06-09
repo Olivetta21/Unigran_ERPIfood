@@ -6,7 +6,6 @@ import DTOs.carrinho.ingrediente.IngredienteEscolhaDTO;
 import Interfaces.ControllerInterface;
 import Interfaces.InterfaceDTO;
 import Modelos.carrinho.ingrediente.IngredienteEscolha;
-import Modelos.carrinho.ingrediente.IngredienteEscolhaDAO;
 import Modelos.carrinho.ingrediente.IngredienteEscolhaDAOImpl;
 
 public class IngredienteEscolhaCTRL extends ControllerInterface {

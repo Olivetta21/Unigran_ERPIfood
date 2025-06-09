@@ -152,3 +152,20 @@ create view ingrediente_escolha_completo as (
     from ingrediente_escolha pe
     join ingrediente i on pe.ingrediente_id = i.id
 );
+
+create table pagamento (
+    id serial not null primary key,
+    pedido_id integer not null references pedido(id),
+    pix decimal(10,2),
+    dinheiro decimal(10,2),
+    cartao decimal(10,2),
+    check (pix is not null or dinheiro is not null or cartao is not null)
+);
+
+create table cupom (
+    id serial not null primary key,
+    valor decimal(10,2) not null,
+    codigo varchar(50) not null,
+    validade date not null,
+    pagamento_id integer not null references pagamento(id)
+);
