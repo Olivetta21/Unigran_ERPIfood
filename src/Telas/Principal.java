@@ -36,6 +36,7 @@ import Interfaces.delivery.EntregaCriarPainel;
 import Interfaces.delivery.endereco.BairroCriarPainel;
 import Interfaces.delivery.endereco.EnderecoCriarPainel;
 import Interfaces.login.LoginCriarPainel;
+import Utilitarios.PopularBanco;
 
 /**
  *
@@ -86,6 +87,8 @@ public class Principal extends javax.swing.JFrame {
         jSeparator4 = new javax.swing.JPopupMenu.Separator();
         jMBB_pagamento = new javax.swing.JMenuItem();
         jMBB_cupom = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMI_populartodos = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -252,6 +255,18 @@ public class Principal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMB_Cadastros);
 
+        jMenu1.setText("Popular Banco");
+
+        jMI_populartodos.setText("Todos");
+        jMI_populartodos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMI_populartodosActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMI_populartodos);
+
+        jMenuBar1.add(jMenu1);
+
         setJMenuBar(jMenuBar1);
 
         pack();
@@ -321,6 +336,10 @@ public class Principal extends javax.swing.JFrame {
         new CadastroGeral(null, false, new CupomCTRL(), new CupomCriarPainel());
     }//GEN-LAST:event_jMBB_cupomActionPerformed
 
+    private void jMI_populartodosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMI_populartodosActionPerformed
+        PopularBanco.tudo();
+    }//GEN-LAST:event_jMI_populartodosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -376,6 +395,8 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMBB_statuspedido;
     private javax.swing.JMenuItem jMBB_telefone;
     private javax.swing.JMenu jMB_Cadastros;
+    private javax.swing.JMenuItem jMI_populartodos;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
